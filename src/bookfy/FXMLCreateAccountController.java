@@ -58,20 +58,20 @@ public class FXMLCreateAccountController implements Initializable {
 
     @FXML
     private void saveListener(MouseEvent event) {
-        // if(inputValidationi()){}
-        if (true) {
-            String query = "INSERT INTO user(UserID , FirstName, password)\n"
-                    + "VALUES('" + userNameTextField.getText() + "','" + fullNameTextField.getText() + "','"
-                    + passwordTextField.getText() + "');";
-        Bookfy.getDatabaseHandler().execAction(query);
-        System.out.println(query);
+        
+            if (inputValidation()) {
+                String query = "INSERT INTO user(UserID , FirstName, password)\n"
+                        + "VALUES('" + userNameTextField.getText() + "','" + fullNameTextField.getText() + "','"
+                        + passwordTextField.getText() + "');";
+            Bookfy.getDatabaseHandler().execAction(query);
+            System.out.println(query);
         }
         
     }
 
     //input validation 
     private boolean inputValidation() {
-
+        if(userNameTextField.getText() == null&&fullNameTextField.getText()==null);
         return false;
     }
 }
