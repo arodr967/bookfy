@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
  *
  * @author Roger Boza
  */
-public class FXMLLoginController implements Initializable {
+public class FXMLLoginController {
     @FXML
     private JFXTextField username;
     
@@ -34,7 +34,7 @@ public class FXMLLoginController implements Initializable {
     @FXML
     private JFXButton cancel;
     
-    @Override
+  
     public void initialize(URL url, ResourceBundle rb) {
         //start logic here
     }    
