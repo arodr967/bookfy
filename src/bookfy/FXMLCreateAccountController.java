@@ -24,25 +24,29 @@ import javafx.scene.input.MouseEvent;
 public class FXMLCreateAccountController implements Initializable {
 
     @FXML
-    private Label fullNameLabel;
-    @FXML
-    private JFXTextField fullNameTextField;
-    @FXML
-    private Label emailAddressLabel;
-    @FXML
     private JFXTextField EmailAddressTextField;
-    @FXML
-    private Label userNameLabel;
-    @FXML
-    private Label passwordLabel;
-    @FXML
-    private Label verifyPasswordLabel;
     @FXML
     private JFXTextField userNameTextField;
     @FXML
     private JFXTextField passwordTextField;
     @FXML
     private JFXButton saveButton;
+    @FXML
+    private JFXTextField firstNameTextField;
+    @FXML
+    private JFXTextField lastNameTextField;
+    @FXML
+    private JFXTextField cityTextField;
+    @FXML
+    private JFXTextField StateTextField;
+    @FXML
+    private JFXTextField CountryTextField;
+    @FXML
+    private JFXTextField verifyPasswordTextField;
+    @FXML
+    private JFXButton cancelButton;
+    @FXML
+    private JFXTextField AddressLineTextField;
 
     /**
      * Initializes the controller class.
@@ -53,23 +57,42 @@ public class FXMLCreateAccountController implements Initializable {
     }
 
     @FXML
-    private void verifyPasswordTextField(ActionEvent event) {
-    }
-
-    @FXML
     private void saveListener(MouseEvent event) {
-        // if(inputValidationi()){}
-        if (true) {
-            String query = "INSERT INTO user(UserID , FirstName, password)\n"
-                    + "VALUES('" + userNameTextField.getText() + "','" + fullNameTextField.getText() + "','"
+
+        boolean addressFlag = addressFieldsCheck();
+
+        //Create Account - no Address
+        //missing validator - if(inputValidationi()){}
+        if (!addressFlag && true) {
+            String query = "INSERT INTO user(UserID , FirstName, LastName, password)\n"
+                    + "VALUES('" + userNameTextField.getText() + "','"
+                    + firstNameTextField.getText() + "','"
+                    + lastNameTextField.getText() + "','"
                     + passwordTextField.getText() + "');";
-        Bookfy.getDatabaseHandler().execAction(query);
-        System.out.println(query);
+            Bookfy.getDatabaseHandler().execAction(query);
+        } //Create Account - with Address
+        else if (true) {
+            String query = "INSERT INTO user(UserID , FirstName, "
+                    + "LastName, password,AddressLine,City,State,Country)\n"
+                    + "VALUES('" + userNameTextField.getText() + "','"
+                    + firstNameTextField.getText() + "','"
+                    + lastNameTextField.getText() + "','"
+                    + passwordTextField.getText() + "','"
+                    + AddressLineTextField.getText() + "','"
+                    + StateTextField.getText() + "','"
+                    + CountryTextField.getText() + "');'";
+            Bookfy.getDatabaseHandler().execAction(query);
         }
-        
+
+    }
+//addressfield validator - not implemented 
+
+    private boolean addressFieldsCheck() {
+
+        return false;
     }
 
-    //input validation 
+    //input validation - not implemented
     private boolean inputValidation() {
 
         return false;
