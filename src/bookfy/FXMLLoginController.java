@@ -23,16 +23,10 @@ import javax.swing.JOptionPane;
  */
 public class FXMLLoginController implements Initializable {
     @FXML
-    private JFXTextField username;
-    
-    @FXML
-    private JFXPasswordField password;
+    private JFXTextField txtUsername;
 
     @FXML
-    private JFXButton login;
-
-    @FXML
-    private JFXButton cancel;
+    private JFXPasswordField txtPassword;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -40,14 +34,9 @@ public class FXMLLoginController implements Initializable {
     }    
 
     @FXML
-    void makeCancel(ActionEvent event) {
-        System.exit(0);
-    }
-
-    @FXML
     void makeLogin(ActionEvent event) {
         try {
-            String query = "SELECT FirstName, LastName FROM user where UserID = \'" + username.getText() + "\' AND password = \"" + password.getText() + "\"";
+            String query = "SELECT FirstName, LastName FROM user where UserID = \'" + txtUsername.getText() + "\' AND password = \"" + txtPassword.getText() + "\"";
 
             ResultSet rs = Bookfy.getDatabaseHandler().execQuery(query);
 
@@ -65,4 +54,8 @@ public class FXMLLoginController implements Initializable {
             JOptionPane.showMessageDialog(null, e);
         }
     } 
+
+    @FXML
+    private void forgotPassword(ActionEvent event) {
+    }
 }

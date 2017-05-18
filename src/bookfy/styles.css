@@ -1,0 +1,76 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : May 17, 2017, 11:42:12 PM
+    Author     : Roger Boza
+*/
+
+/*******************************************************************************
+ *                                                                             *
+ * Scrollpane                                                                  *
+ *                                                                             *
+ ******************************************************************************/
+.scroll-pane {
+    -fx-background-color: white;  
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+/*******************************************************************************
+ *                                                                             *
+ * Button			                       			       *
+ *                                                                             *
+ ******************************************************************************/
+.button-flat {
+    -fx-effect: null;
+    -fx-background-color: transparent;
+    -fx-text-fill: #f44336;
+}
+
+.button-raised {
+    -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.30), 6.0, 0.3, 0, 1);
+    -fx-background-color: #f44336;
+    -fx-text-weight: Bold;
+    -fx-text-fill: white;
+}
+
+.button-raised, .button-flat {
+    -fx-font-weight: bold;
+}
+
+/*******************************************************************************
+ *                                                                             *
+ * Hyperlink			                       			       *
+ *                                                                             *
+ ******************************************************************************/
+.hyperLink {
+   -fx-text-fill: #f44336;
+}
+
+.hyperLink:hover {
+   -fx-text-fill: #f44336;
+}
+
+/*******************************************************************************
+ *                                                                             *
+ * Textbox			                       			       *
+ *                                                                             *
+ ******************************************************************************/
+.textbox {
+   -fx-text-fill: black;
+   -jfx-focus-color: black;
+}
+
+/*******************************************************************************
+ *                                                                             *
+ * Panes			                       			       *
+ *                                                                             *
+ ******************************************************************************/
+.pane {
+   -fx-background-color: white;
+}
