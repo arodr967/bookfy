@@ -7,6 +7,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
+<<<<<<< HEAD
 <AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bookfy.FXMLCreateAccountController">
    <children>
       <JFXTextField fx:id="firstNameTextField" labelFloat="true" layoutX="46.0" layoutY="71.0" prefHeight="29.0" prefWidth="500.0" promptText="First Name: " />
@@ -22,16 +23,39 @@
       <JFXButton fx:id="saveButton" defaultButton="true" layoutX="48.0" layoutY="732.0" onMouseClicked="#saveListener" prefHeight="31.0" prefWidth="106.0" text="SAVE" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" disable="true" fill="#7a7f83" height="29.0" layoutX="14.0" layoutY="14.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="564.0" />
       <Label layoutX="26.0" layoutY="18.0" text="ABOUT YOU" textFill="WHITE">
+=======
+
+<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="bookfy.FXMLCreateAccountController">
+   <children>
+      <Label fx:id="fullNameLabel" layoutX="47.0" layoutY="93.0" text="Full Name:" />
+      <JFXTextField fx:id="fullNameTextField" layoutX="47.0" layoutY="114.0" prefHeight="29.0" prefWidth="500.0" />
+      <Label fx:id="emailAddressLabel" layoutX="46.0" layoutY="169.0" text="Email Address:" />
+      <JFXTextField fx:id="EmailAddressTextField" layoutX="47.0" layoutY="190.0" prefHeight="29.0" prefWidth="500.0" />
+      <Label fx:id="userNameLabel" layoutX="46.0" layoutY="281.0" text="User Name:" />
+      <Label fx:id="passwordLabel" layoutX="47.0" layoutY="356.0" text="Password:" />
+      <Label fx:id="verifyPasswordLabel" layoutX="47.0" layoutY="435.0" text="Verify Password:" />
+      <JFXTextField fx:id="userNameTextField" layoutX="47.0" layoutY="302.0" prefHeight="29.0" prefWidth="500.0" />
+      <JFXTextField fx:id="passwordTextField" layoutX="47.0" layoutY="377.0" prefHeight="29.0" prefWidth="500.0" />
+      <JFXTextField layoutX="47.0" layoutY="456.0" onAction="#verifyPasswordTextField" prefHeight="29.0" prefWidth="500.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" disable="true" fill="#7a7f83" height="29.0" layoutX="14.0" layoutY="56.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="564.0" />
+      <Label layoutX="26.0" layoutY="60.0" text="ABOUT YOU" textFill="WHITE">
+>>>>>>> 2d52110968300358d10ce893fe86f6fe8e9319f6
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
+<<<<<<< HEAD
       <Rectangle arcHeight="5.0" arcWidth="5.0" disable="true" fill="#7a7f83" height="29.0" layoutX="14.0" layoutY="424.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="564.0" />
       <Label layoutX="26.0" layoutY="428.0" text="CREDENTIALS" textFill="WHITE">
+=======
+      <Rectangle arcHeight="5.0" arcWidth="5.0" disable="true" fill="#7a7f83" height="29.0" layoutX="14.0" layoutY="237.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="564.0" />
+      <Label layoutX="26.0" layoutY="241.0" text="CREDENTIALS" textFill="WHITE">
+>>>>>>> 2d52110968300358d10ce893fe86f6fe8e9319f6
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
+<<<<<<< HEAD
       <Label layoutX="29.0" layoutY="240.0" text="Home Address (optional)">
          <font>
             <Font size="16.0" />
@@ -39,5 +63,8 @@
       </Label>
       <JFXButton fx:id="cancelButton" defaultButton="true" layoutX="176.0" layoutY="732.0" onMouseClicked="#saveListener" prefHeight="31.0" prefWidth="106.0" text="CANCEL" />
       <Label fx:id="addressMissingInputLabel" layoutX="378.0" layoutY="379.0" text=" " />
+=======
+      <JFXButton fx:id="saveButton" defaultButton="true" layoutX="26.0" layoutY="542.0" onMouseClicked="#saveListener" text="SAVE" />
+>>>>>>> 2d52110968300358d10ce893fe86f6fe8e9319f6
    </children>
 </AnchorPane>

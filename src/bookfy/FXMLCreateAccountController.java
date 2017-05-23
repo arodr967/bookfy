@@ -81,6 +81,7 @@ public class FXMLCreateAccountController implements Initializable {
 
     @FXML
     private void saveListener(MouseEvent event) {
+<<<<<<< HEAD
 
         
 
@@ -118,6 +119,15 @@ public class FXMLCreateAccountController implements Initializable {
             return true;
         }else{
         addressMissingInputLabel.setText("Missing Address");
+=======
+        
+            if (inputValidation()) {
+                String query = "INSERT INTO user(UserID , FirstName, password)\n"
+                        + "VALUES('" + userNameTextField.getText() + "','" + fullNameTextField.getText() + "','"
+                        + passwordTextField.getText() + "');";
+            Bookfy.getDatabaseHandler().execAction(query);
+            System.out.println(query);
+>>>>>>> 2d52110968300358d10ce893fe86f6fe8e9319f6
         }
         
         return false;
@@ -125,11 +135,15 @@ public class FXMLCreateAccountController implements Initializable {
 
     //input validation - not implemented
     private boolean inputValidation() {
+<<<<<<< HEAD
         if (firstNameValidator.validate() & lastNameValidator.validate()
                 & emailAddressValidator.validate() & userNameValidator.validate()
                 & passwordValidator.validate() & verifyPasswordValidator.validate()) {
             return true;
         }
+=======
+        if(userNameTextField.getText() == null&&fullNameTextField.getText()==null);
+>>>>>>> 2d52110968300358d10ce893fe86f6fe8e9319f6
         return false;
     }
 }
