@@ -1,12 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package bookfy;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.validation.RequiredFieldValidator;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.util.ResourceBundle;
@@ -47,54 +43,93 @@ public class FXMLCreateAccountController implements Initializable {
     private JFXButton cancelButton;
     @FXML
     private JFXTextField AddressLineTextField;
+    @FXML
+    private Label addressMissingInputLabel;
+
+    //validators
+    private TextFieldValidator firstNameValidator;
+    private TextFieldValidator lastNameValidator;
+    private TextFieldValidator emailAddressValidator;
+    private TextFieldValidator userNameValidator;
+    private TextFieldValidator passwordValidator;
+    private TextFieldValidator verifyPasswordValidator;
+    
+    private TextFieldValidator addressLineValidator;
+    private TextFieldValidator cityValidator;
+    private TextFieldValidator stateValidator;
+    private TextFieldValidator countryValidator;
+    
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+
+        firstNameValidator = new TextFieldValidator(firstNameTextField, "Missing First Name");
+        lastNameValidator = new TextFieldValidator(lastNameTextField, "Missing Last Name");
+        emailAddressValidator = new TextFieldValidator(EmailAddressTextField, "Missing Email Address");
+        userNameValidator = new TextFieldValidator(userNameTextField, "Missing User Name");
+        passwordValidator = new TextFieldValidator(passwordTextField, "Missing Password");
+        verifyPasswordValidator = new TextFieldValidator(verifyPasswordTextField, "Missing Password Verification");
+
+        addressLineValidator =  new TextFieldValidator(AddressLineTextField, "");
+        cityValidator =  new TextFieldValidator(cityTextField, "");
+        stateValidator =  new TextFieldValidator(StateTextField, "");
+        countryValidator = new TextFieldValidator(CountryTextField, "");
     }
 
     @FXML
     private void saveListener(MouseEvent event) {
 
-        boolean addressFlag = addressFieldsCheck();
+        
 
-        //Create Account - no Address
-        //missing validator - if(inputValidationi()){}
-        if (!addressFlag && true) {
-            String query = "INSERT INTO user(UserID , FirstName, LastName, password)\n"
-                    + "VALUES('" + userNameTextField.getText() + "','"
-                    + firstNameTextField.getText() + "','"
-                    + lastNameTextField.getText() + "','"
-                    + passwordTextField.getText() + "');";
-            Bookfy.getDatabaseHandler().execAction(query);
-        } //Create Account - with Address
-        else if (true) {
+        if (addressFieldsCheck() & inputValidation()) {
             String query = "INSERT INTO user(UserID , FirstName, "
-                    + "LastName, password,AddressLine,City,State,Country)\n"
+                    + "LastName, email, password,AddressLine,City,State,Country)\n"
                     + "VALUES('" + userNameTextField.getText() + "','"
                     + firstNameTextField.getText() + "','"
                     + lastNameTextField.getText() + "','"
+                    + EmailAddressTextField.getText() + "','"
                     + passwordTextField.getText() + "','"
                     + AddressLineTextField.getText() + "','"
+                    + cityTextField.getText() + "','"
                     + StateTextField.getText() + "','"
                     + CountryTextField.getText() + "');'";
             Bookfy.getDatabaseHandler().execAction(query);
-        }
-
+        }else if (!addressFieldsCheck() & inputValidation()) {
+            String query = "INSERT INTO user(UserID , FirstName, LastName, email, password)\n"
+                    + "VALUES('" + userNameTextField.getText() + "','"
+                    + firstNameTextField.getText() + "','"
+                    + lastNameTextField.getText() + "','"
+                    + EmailAddressTextField.getText() + "','"
+                    + passwordTextField.getText() + "');";
+            Bookfy.getDatabaseHandler().execAction(query);
+        } 
+        
     }
 //addressfield validator - not implemented 
 
     private boolean addressFieldsCheck() {
 
+        if(addressLineValidator.validate() & cityValidator.validate() 
+                & stateValidator.validate() & countryValidator.validate() ){
+        addressMissingInputLabel.setText("");
+            return true;
+        }else{
+        addressMissingInputLabel.setText("Missing Address");
+        }
+        
         return false;
     }
 
     //input validation - not implemented
     private boolean inputValidation() {
-
+        if (firstNameValidator.validate() & lastNameValidator.validate()
+                & emailAddressValidator.validate() & userNameValidator.validate()
+                & passwordValidator.validate() & verifyPasswordValidator.validate()) {
+            return true;
+        }
         return false;
     }
 }

@@ -20,11 +20,14 @@ public class Bookfy extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLCreateAccount.fxml"));
+        //FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLMain.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLCreateAccount.fxml"));
+        Parent root = loader.load();
         
         Scene scene = new Scene(root);
         
         stage.setScene(scene);
+        stage.setTitle("Bookfy");
         stage.show();
     }
 

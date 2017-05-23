@@ -12,7 +12,7 @@
       <JFXTextField fx:id="firstNameTextField" labelFloat="true" layoutX="46.0" layoutY="71.0" prefHeight="29.0" prefWidth="500.0" promptText="First Name: " />
       <JFXTextField fx:id="lastNameTextField" labelFloat="true" layoutX="47.0" layoutY="130.0" prefHeight="29.0" prefWidth="500.0" promptText="Last Name" />
       <JFXTextField fx:id="EmailAddressTextField" labelFloat="true" layoutX="46.0" layoutY="190.0" prefHeight="29.0" prefWidth="500.0" promptText="Email Address" />
-      <JFXTextField fx:id="emailAddressTextField" labelFloat="true" layoutX="47.0" layoutY="274.0" prefHeight="29.0" prefWidth="500.0" promptText="Address Line:" />
+      <JFXTextField fx:id="AddressLineTextField" labelFloat="true" layoutX="47.0" layoutY="274.0" prefHeight="29.0" prefWidth="500.0" promptText="Address Line:" />
       <JFXTextField fx:id="cityTextField" labelFloat="true" layoutX="47.0" layoutY="325.0" prefHeight="29.0" prefWidth="211.0" promptText="City:" />
       <JFXTextField fx:id="StateTextField" labelFloat="true" layoutX="282.0" layoutY="325.0" prefHeight="29.0" prefWidth="68.0" promptText="State:" />
       <JFXTextField fx:id="CountryTextField" labelFloat="true" layoutX="378.0" layoutY="325.0" promptText="Country:" />
@@ -38,5 +38,6 @@
          </font>
       </Label>
       <JFXButton fx:id="cancelButton" defaultButton="true" layoutX="176.0" layoutY="732.0" onMouseClicked="#saveListener" prefHeight="31.0" prefWidth="106.0" text="CANCEL" />
+      <Label fx:id="addressMissingInputLabel" layoutX="378.0" layoutY="379.0" text=" " />
    </children>
 </AnchorPane>

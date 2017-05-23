@@ -3,23 +3,41 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
-<?import javafx.scene.effect.DropShadow?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="308.0" prefWidth="469.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="bookfy.FXMLLoginController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="700.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bookfy.FXMLLoginController">
    <children>
-      <Pane layoutX="16.0" layoutY="13.0" prefHeight="283.0" prefWidth="438.0" style="-fx-background-color: #ffffff;">
+      <VBox prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <JFXTextField fx:id="username" labelFloat="true" layoutX="95.0" layoutY="43.0" prefHeight="29.0" prefWidth="248.0" promptText="Username:" />
-            <JFXPasswordField fx:id="password" labelFloat="true" layoutX="95.0" layoutY="117.0" prefHeight="25.0" prefWidth="248.0" promptText="Password:" />
-            <JFXButton fx:id="login" layoutX="95.0" layoutY="201.0" onAction="#makeLogin" prefHeight="38.0" prefWidth="101.0" ripplerFill="#462727" style="-fx-background-color: #FBC02D;" text="Login" />
-            <JFXButton fx:id="cancel" layoutX="242.0" layoutY="201.0" onAction="#makeCancel" prefHeight="38.0" prefWidth="101.0" ripplerFill="WHITE" style="-fx-background-color: #FBC02D;" text="Cancel" />   
+            <JFXTextField fx:id="txtUsername" labelFloat="true" promptText="Username:" styleClass="textbox" text="Input text">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="200.0" right="200.0" top="100.0" />
+               </VBox.margin>
+            </JFXTextField>
+            <JFXPasswordField fx:id="txtPassword" labelFloat="true" promptText="Password:" styleClass="textbox" text="Input text">
+               <VBox.margin>
+                  <Insets left="200.0" right="200.0" top="50.0" />
+               </VBox.margin>
+            </JFXPasswordField>
+            <Hyperlink onAction="#forgotPassword" styleClass="hyperLink" text="Forgot password?" underline="true">
+               <VBox.margin>
+                  <Insets left="180.0" top="30.0" />
+               </VBox.margin>
+            </Hyperlink>
+            <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+               <children>
+                  <JFXButton onMouseClicked="#createAccount" styleClass="button-flat" text="SIGN UP" />
+                  <JFXButton onAction="#makeLogin" styleClass="button-raised" text="     LOGIN     " />
+               </children>
+               <VBox.margin>
+                  <Insets left="200.0" right="200.0" top="20.0" />
+               </VBox.margin>
+            </HBox>
          </children>
-<!--         <effect>
-            <DropShadow />
-         </effect>-->
-      </Pane>
+      </VBox>
    </children>
 </AnchorPane>
