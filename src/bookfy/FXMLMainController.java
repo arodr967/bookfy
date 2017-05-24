@@ -13,11 +13,8 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 
 /**
  * FXML Controller class
@@ -34,14 +31,33 @@ public class FXMLMainController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        displayLogIn();
+    }    
+    
+    public void displayLogIn(){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/bookfy/FXMLLogin.fxml"));
             AnchorPane logIn = loader.load();
 
-            mainContent.getChildren().add(logIn);
+            showContent(logIn);
         } catch (IOException ex) {
             Logger.getLogger(FXMLMainController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }    
+    }
     
+    public void displayAccount(){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/bookfy/FXMLCreateAccount.fxml"));
+            AnchorPane account = loader.load();
+
+            showContent(account);
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLMainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void showContent(AnchorPane pane){
+        mainContent.getChildren().clear();
+        mainContent.getChildren().add(pane);
+    }
 }

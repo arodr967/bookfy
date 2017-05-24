@@ -16,15 +16,26 @@ import javafx.stage.Stage;
  * @author Roger Boza
  */
 public class Bookfy extends Application {
-    private static DatabaseHandler databaseHandler = DatabaseHandler.getInstance();
+    private static final DatabaseHandler databaseHandler = DatabaseHandler.getInstance();
+    private static FXMLMainController mainWindowController;
+    
+    public enum Account {
+        SIGNUP,
+        UPDATE,
+        DELETE
+    }
     
     @Override
     public void start(Stage stage) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLMain.fxml"));
         Parent root = loader.load();
         
+        mainWindowController = loader.getController();
+        
         Scene scene = new Scene(root);
         
+        //if we need to start maxmized
+        //stage.setMaximized(true);
         stage.setScene(scene);
         stage.setTitle("Bookfy");
         stage.show();
@@ -39,5 +50,9 @@ public class Bookfy extends Application {
 
     public static DatabaseHandler getDatabaseHandler() {
         return databaseHandler;
+    }
+
+    public static FXMLMainController getMainWindowController() {
+        return mainWindowController;
     }
 }

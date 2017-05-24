@@ -56,6 +56,11 @@ public class FXMLLoginController implements Initializable {
     } 
 
     @FXML
+    private void signUp(ActionEvent event) {
+        Bookfy.getMainWindowController().displayAccount();
+    }
+    
+    @FXML
     private void forgotPassword(ActionEvent event) {
     }
 }
