@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="bookfy.jar" size="44907" download="eager" />
+    <jar href="bookfy.jar" size="50300" download="eager" />
     <jar href="lib\jfoenix.jar" size="2323355" download="eager" />
     <jar href="lib\mysql-connector-java-5.1.40-bin.jar" size="990927" download="eager" />
   </resources>

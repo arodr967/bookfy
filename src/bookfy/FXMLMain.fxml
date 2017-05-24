@@ -7,8 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
-<HBox alignment="CENTER" prefHeight="725.0" prefWidth="800.0" styleClass="pane" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bookfy.FXMLMainController">
+<HBox alignment="CENTER" prefHeight="1000.0" prefWidth="800.0" styleClass="pane" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bookfy.FXMLMainController">
    <children>
       <GridPane prefWidth="890.0" styleClass="pane">
         <columnConstraints>
