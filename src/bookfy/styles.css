@@ -74,3 +74,17 @@ and open the template in the editor.
 .pane {
    -fx-background-color: white;
 }
+
+/*******************************************************************************
+ *                                                                             *
+ * Labels			                       			       *
+ *                                                                             *
+ ******************************************************************************/
+.headerlabel {
+   -fx-background-color: #4d4d4d;
+   -fx-background-radius: 2 2 2 2;
+   -fx-text-fill: white;
+   -fx-font-weight: bold;
+   -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+   -fx-padding: 5 5 5 10;
+}
