@@ -88,3 +88,12 @@ and open the template in the editor.
    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
    -fx-padding: 5 5 5 10;
 }
+
+/*******************************************************************************
+ *                                                                             *
+ * Search			                       			       *
+ *                                                                             *
+ ******************************************************************************/
+.search_style {
+   -fx-background-color: #212121;
+}

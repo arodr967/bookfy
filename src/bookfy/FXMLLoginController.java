@@ -5,7 +5,6 @@
  */
 package bookfy;
 
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
@@ -15,6 +14,8 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -35,13 +36,21 @@ public class FXMLLoginController implements Initializable {
 
     @FXML
     void makeLogin(ActionEvent event) {
+        logIn();
+    } 
+
+    private void logIn(){
         try {
-            String query = "SELECT FirstName, LastName FROM user where UserID = \'" + txtUsername.getText() + "\' AND password = \"" + txtPassword.getText() + "\"";
+            String userName = txtUsername.getText();
+            
+            String query = "SELECT FirstName, LastName FROM user where UserID = \'" + userName + "\' AND password = \"" + txtPassword.getText() + "\"";
 
             ResultSet rs = Bookfy.getDatabaseHandler().execQuery(query);
 
             if(rs.next()){
-                JOptionPane.showMessageDialog(null, "Welcome " + rs.getString(1) + " " + rs.getString(2));
+                //JOptionPane.showMessageDialog(null, "Welcome " + rs.getString(1) + " " + rs.getString(2));
+                User user = new User(userName);
+                Bookfy.getMainWindowController().displayHome(user);
             }
             else{
                 JOptionPane.showMessageDialog(null, "Oppps... Wrong username or password.");
@@ -53,8 +62,8 @@ public class FXMLLoginController implements Initializable {
         catch (Exception e){
             JOptionPane.showMessageDialog(null, e);
         }
-    } 
-
+    }
+    
     @FXML
     private void signUp(ActionEvent event) {
         Bookfy.getMainWindowController().displayAccount();
@@ -62,5 +71,13 @@ public class FXMLLoginController implements Initializable {
     
     @FXML
     private void forgotPassword(ActionEvent event) {
+    }
+
+    @FXML
+    private void check(KeyEvent event) {
+        if(event.getCode() == KeyCode.ENTER)
+        {
+            logIn();
+        }
     }
 }

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="AnchorPane" maxHeight="750.0" minHeight="750.0" prefHeight="750.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="bookfy.FXMLHomeController">
+   <children>
+      <ImageView fitHeight="700.0" fitWidth="800.0" layoutY="25.0" AnchorPane.bottomAnchor="25.0" AnchorPane.topAnchor="25.0">
+         <image>
+            <Image url="@home.jpg" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

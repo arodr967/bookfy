@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 public class Bookfy extends Application {
     private static final DatabaseHandler databaseHandler = DatabaseHandler.getInstance();
     private static FXMLMainController mainWindowController;
+    private static User user;
     
     public enum Account {
         SIGNUP,
@@ -54,5 +55,13 @@ public class Bookfy extends Application {
 
     public static FXMLMainController getMainWindowController() {
         return mainWindowController;
+    }
+
+    public static User getUser() {
+        return user;
+    }
+
+    public static void setUser(User user) {
+        Bookfy.user = user;
     }
 }
