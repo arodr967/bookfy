@@ -107,4 +107,18 @@ public class FXMLMainController implements Initializable {
         mainContent.getChildren().clear();
         mainContent.getChildren().add(pane);
     }
+
+    void viewProfile() {
+        try {  
+            
+            
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/bookfy/FXMLViewProfile.fxml"));
+            home = loader.load();
+
+            showContent(home);
+            displaySearch();
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLMainController.class.getName()).log(Level.SEVERE, null, ex);
+        }   
+    }
 }

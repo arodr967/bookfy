@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="editAccount" onMousePressed="#editAccountInfo" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bookfy.FXMLViewProfileController">
+    <stylesheets>
+        <URL value="@styles.css" />
+    </stylesheets>
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" disable="true" fill="#7a7f83" height="29.0" layoutX="18.0" layoutY="25.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="564.0" />
+      <Label layoutX="24.0" layoutY="29.0" text="MY ACCOUNT" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" disable="true" fill="#7a7f83" height="29.0" layoutX="18.0" layoutY="242.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="264.0" />
+      <Label layoutX="24.0" layoutY="246.0" text="SHIPPING INFO" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" disable="true" fill="#7a7f83" height="29.0" layoutX="294.0" layoutY="242.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="264.0" />
+      <Label layoutX="297.0" layoutY="246.0" text="CREDIT CARDS" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="134.0" fitWidth="202.0" layoutX="48.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="name" layoutX="352.0" layoutY="54.0" prefHeight="43.0" prefWidth="149.0" textAlignment="RIGHT">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
+      <Label fx:id="email" layoutX="352.0" layoutY="105.0" prefHeight="29.0" prefWidth="149.0" />
+      <Label fx:id="address" layoutX="352.0" layoutY="157.0" prefHeight="29.0" prefWidth="149.0" />
+      <Label fx:id="editCreditCard" layoutX="521.0" layoutY="295.0" onMousePressed="#editCreditCard" text="EDIT" textFill="#f50808" />
+      <Label layoutX="521.0" layoutY="337.0" onMousePressed="#editCreditCard" text="EDIT" textFill="#f50808" />
+      <Label fx:id="displayCreditCard" layoutX="338.0" layoutY="285.0" prefHeight="37.0" prefWidth="163.0" />
+      <Label fx:id="userName" layoutX="361.0" layoutY="76.0" prefHeight="43.0" prefWidth="149.0" textAlignment="RIGHT" textFill="#f50707">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="displayShipping" layoutX="60.0" layoutY="281.0" prefHeight="57.0" prefWidth="149.0" />
+      <Label fx:id="editShippingInfo" layoutX="24.0" layoutY="354.0" onMousePressed="#editShippingInfo" text="EDIT SHIPPING INFO" textFill="#f50808" />
+      <Label fx:id="uploadImage" layoutX="99.0" layoutY="209.0" onMousePressed="#uploadUserImage" text="UPLOAD IMAGE" textFill="#f50808" />
+      <Label fx:id="editUserAccount" layoutX="361.0" layoutY="209.0" onMousePressed="#editAccountInfo" text="EDIT ACCOUNT" textFill="#f50808" />
+      <Label fx:id="displayCreditCard1" layoutX="338.0" layoutY="327.0" prefHeight="37.0" prefWidth="163.0" />
+      <ImageView fitHeight="37.0" fitWidth="55.0" layoutX="303.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@email_icon.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="24.0" layoutX="317.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@homeAdd.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="24.0" layoutX="24.0" layoutY="302.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@shipping.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="29.0" fitWidth="38.0" layoutX="298.0" layoutY="295.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@creditCard.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="29.0" fitWidth="40.0" layoutX="298.0" layoutY="331.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@creditCard.jpg" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

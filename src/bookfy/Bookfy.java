@@ -19,6 +19,9 @@ public class Bookfy extends Application {
     private static final DatabaseHandler databaseHandler = DatabaseHandler.getInstance();
     private static FXMLMainController mainWindowController;
     private static User user;
+    private static CreditCard creditCardNumber;
+    private static Address address;
+
     
     public enum Account {
         SIGNUP,
@@ -60,7 +63,16 @@ public class Bookfy extends Application {
     public static User getUser() {
         return user;
     }
-
+    
+    public static CreditCard getCreditCardNumber()
+    {
+        return creditCardNumber;
+    }
+    
+    public static Address getUserAddress()
+    {
+        return address;
+    }
     public static void setUser(User user) {
         Bookfy.user = user;
     }
