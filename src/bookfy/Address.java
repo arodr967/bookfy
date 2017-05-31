@@ -19,13 +19,13 @@ public class Address {
     private String country;
 
     public Address(String name, String address, String address1, String city, String state, int zipcode, String country) {
-        this.name = name;
-        this.addressLine1 = address;
-        this.addressLine2 = address1;
-        this.city = city;
-        this.state = state;
+        this.name = (name == null) ? "John Smith" : name;
+        this.addressLine1 = (address == null) ? "ABC Street" : address;
+        this.addressLine2 = (address1 == null) ? "" : address1;
+        this.city = (city == null) ? "" : city;
+        this.state = (state == null) ? "" : state;
         this.zipcode = zipcode;
-        this.country = country;
+        this.country = (country == null) ? "" : country;
     }
 
     public String getName() {
@@ -82,6 +82,35 @@ public class Address {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+    
+    public String formattedShort(){
+        String output = addressLine1 + "\n";
+        
+        if(addressLine2 != null && !addressLine2.equalsIgnoreCase("")){
+            output += addressLine2 + "\n";
+        }
+        
+        output += city + ", " + state.toUpperCase() + ", " + country.toUpperCase();
+        
+        return output;
+    }
+    
+    public String formattedLong(){
+        String output = name + "\n" + addressLine1 + "\n";
+        
+        if(addressLine2 != null && !addressLine2.equalsIgnoreCase("")){
+            output += addressLine2 + "\n";
+        }
+        
+        output += city + ", " + state.toUpperCase() + ", " + country.toUpperCase();
+        
+        return output;
+    }
+
+    @Override
+    public String toString() {
+        return formattedLong();
     }
 
     

@@ -43,11 +43,15 @@ public class FXMLLoginController implements Initializable {
         try {
             String userName = txtUsername.getText();
             
-            String query = "SELECT FirstName, LastName FROM user where UserID = \'" + userName + "\' AND password = \"" + txtPassword.getText() + "\"";
+            String query = "SELECT FirstName, LastName, LazyDelete FROM user where UserID = \'" + userName + "\' AND password = \"" + txtPassword.getText() + "\"";
 
             ResultSet rs = Bookfy.getDatabaseHandler().execQuery(query);
 
             if(rs.next()){
+                if(!rs.getString(3).equalsIgnoreCase("0")){//account has been deactivated
+                    JOptionPane.showMessageDialog(null, "Your account has been deactivated.", "Bookfy", JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                }
                 //JOptionPane.showMessageDialog(null, "Welcome " + rs.getString(1) + " " + rs.getString(2));
                 User user = new User(userName);
                 Bookfy.getMainWindowController().displayHome(user);
@@ -66,7 +70,7 @@ public class FXMLLoginController implements Initializable {
     
     @FXML
     private void signUp(ActionEvent event) {
-        Bookfy.getMainWindowController().displayAccount();
+        Bookfy.getMainWindowController().displayCreateAccount();
     }
     
     @FXML

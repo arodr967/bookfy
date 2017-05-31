@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -29,7 +31,18 @@
                </children>
             </HBox>
             <HBox fx:id="searchPane" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1" />
-            <HBox fx:id="mainContent" alignment="CENTER" prefHeight="750.0" prefWidth="800.0" GridPane.rowIndex="2" />
+            <ScrollPane prefWidth="800.0" GridPane.rowIndex="2">
+               <content>
+                  <HBox fx:id="mainContent" alignment="TOP_CENTER" prefWidth="780.0">
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                  </HBox>
+               </content>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </ScrollPane>
          </children>
       </GridPane>
    </children>

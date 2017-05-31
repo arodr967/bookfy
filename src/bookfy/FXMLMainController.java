@@ -5,6 +5,7 @@
  */
 package bookfy;
 
+import com.jfoenix.controls.JFXScrollPane;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -13,6 +14,7 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javax.swing.JOptionPane;
@@ -25,10 +27,11 @@ import javax.swing.JOptionPane;
 public class FXMLMainController implements Initializable {
     private AnchorPane home;
     
-    @FXML
-    private HBox mainContent;
+
     @FXML
     private HBox searchPane;
+    @FXML
+    private HBox mainContent;
 
     /**
      * Initializes the controller class.
@@ -53,9 +56,69 @@ public class FXMLMainController implements Initializable {
         }
     }
     
-    public void displayAccount(){
+    public void displayCreateAccount(){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/bookfy/FXMLCreateAccount.fxml"));
+            AnchorPane account = loader.load();
+
+            showContent(account);
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLMainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void displayEditAccount(){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/bookfy/FXMLEditAccount.fxml"));
+            AnchorPane editAccount = loader.load();
+
+            showContent(editAccount);
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLMainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void displayEditShippingInfo(){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/bookfy/FXMLEditShipping.fxml"));
+            AnchorPane shippingInfo = loader.load();
+
+            showContent(shippingInfo);
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLMainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void displayCreditCard(){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/bookfy/FXMLEditShipping.fxml"));
+            loader.setController(new FXMLCreditCardController());
+            AnchorPane creditCard = loader.load();
+
+            showContent(creditCard);
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLMainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void displayEditCard(CreditCard card){
+        try {
+            FXMLCreditCardController controller = new FXMLCreditCardController(card);
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/bookfy/FXMLCreditCard.fxml"));
+            loader.setController(controller);
+            
+            AnchorPane creditCard = loader.load();
+            
+            showContent(creditCard);
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLMainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void displayViewProfile(){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/bookfy/FXMLViewUser.fxml"));
             AnchorPane account = loader.load();
 
             showContent(account);
@@ -104,6 +167,7 @@ public class FXMLMainController implements Initializable {
     }
     
     private void showContent(AnchorPane pane){
+        //mainContent.setContent(pane);
         mainContent.getChildren().clear();
         mainContent.getChildren().add(pane);
     }
