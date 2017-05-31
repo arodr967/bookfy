@@ -14,15 +14,24 @@ public class CreditCard {
     private String number;
     private String expiration;
     private String cvv;
-    
+    private int cCID;
     private Address billing;
 
-    public CreditCard(String name, String number, String expiration, String cvv, Address billing) {
+    public CreditCard(int cCID, String name, String number, String expiration, String cvv, Address billing) {
+        this.cCID = cCID;
         this.name = name;
         this.number = number;
         this.expiration = expiration;
         this.cvv = cvv;
         this.billing = billing;
+    }
+
+    public int getcCID() {
+        return cCID;
+    }
+
+    public void setcCID(int cCID) {
+        this.cCID = cCID;
     }
 
     public String getName() {
@@ -35,6 +44,11 @@ public class CreditCard {
 
     public String getNumber() {
         return number;
+    }
+    
+    public String getLast4Digits() {
+        int len = number.length();
+        return number.substring(len-4, len);
     }
 
     public void setNumber(String number) {
@@ -63,5 +77,40 @@ public class CreditCard {
 
     public void setBilling(Address billing) {
         this.billing = billing;
+    }
+    
+    public void saveCardIntoDB(){
+        User user = Bookfy.getUser();
+        String sql = "INSERT INTO creditcard (UserID, FullName, CardNumber, Expiration, CVV, AddressLine1, AddressLine2, City, State, Country)";
+        sql += " VALUES('" + user.getUserName() + "', '" + name + "', '" + number + "', '" + expiration + "', '" + cvv + "', '" + billing.getAddressLine1() + "', '"  + billing.getAddressLine2() + "', '" + billing.getCity() + "', '" + billing.getState() + "', '" + billing.getCountry() + "')";
+        
+        Bookfy.getDatabaseHandler().execAction(sql);
+    }
+    
+    public void updateCardInDB(){
+        if(cCID == 0){
+            return;
+        }
+
+        String sql = "UPDATE creditcard "
+                    + "SET FullName='" + name + "',"
+                    + "Expiration='"+ expiration + "',"
+                    + "CVV='"+ cvv + "',"
+                    + "AddressLine1='"+ billing.getAddressLine1() + "',"
+                    + "AddressLine2='"+ billing.getAddressLine2() + "',"
+                    + "City='"+ billing.getCity() + "',"
+                    + "State='"+ billing.getState() + "',"
+                    + "Country='" + billing.getCountry() 
+                    + "' WHERE ccID=" + cCID + ";";
+        
+        Bookfy.getDatabaseHandler().execAction(sql);
+    }
+    
+    public void deactivate(){
+        if(cCID == 0){
+            return;
+        }
+         String query = "UPDATE creditcard SET LazyDelete = '" + 1 + "' WHERE ccID=" + cCID + ";";
+         Bookfy.getDatabaseHandler().execAction(query);
     }
 }

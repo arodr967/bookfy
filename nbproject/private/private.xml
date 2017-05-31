@@ -5,13 +5,14 @@
         <group>
             <file>file:/C:/Users/Roger%20Boza/Documents/NetBeansProjects/bookfy/src/bookfy/FXMLSearchController.java</file>
             <file>file:/C:/Users/Roger%20Boza/Documents/NetBeansProjects/bookfy/src/bookfy/FXMLEditAccountController.java</file>
+            <file>file:/C:/Users/Roger%20Boza/Documents/NetBeansProjects/bookfy/src/bookfy/FXMLViewUserController.java</file>
             <file>file:/C:/Users/Roger%20Boza/Documents/NetBeansProjects/bookfy/src/bookfy/FXMLCreateAccountController.java</file>
             <file>file:/C:/Users/Roger%20Boza/Documents/NetBeansProjects/bookfy/src/bookfy/FXMLMainController.java</file>
             <file>file:/C:/Users/Roger%20Boza/Documents/NetBeansProjects/bookfy/src/bookfy/Bookfy.java</file>
             <file>file:/C:/Users/Roger%20Boza/Documents/NetBeansProjects/bookfy/src/bookfy/Address.java</file>
             <file>file:/C:/Users/Roger%20Boza/Documents/NetBeansProjects/bookfy/src/bookfy/styles.css</file>
             <file>file:/C:/Users/Roger%20Boza/Documents/NetBeansProjects/bookfy/src/bookfy/User.java</file>
-            <file>file:/C:/Users/Roger%20Boza/Documents/NetBeansProjects/bookfy/src/bookfy/FXMLViewUserProfileController.java</file>
+            <file>file:/C:/Users/Roger%20Boza/Documents/NetBeansProjects/bookfy/src/bookfy/FXMLViewUser.fxml</file>
             <file>file:/C:/Users/Roger%20Boza/Documents/NetBeansProjects/bookfy/src/bookfy/FXMLLoginController.java</file>
             <file>file:/C:/Users/Roger%20Boza/Documents/NetBeansProjects/bookfy/src/bookfy/FXMLHomeController.java</file>
         </group>

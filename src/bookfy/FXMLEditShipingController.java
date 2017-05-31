@@ -7,20 +7,14 @@ package bookfy;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
  *
  * @author Roger Boza
  */
-public class FXMLSearchController implements Initializable {
-
-    @FXML
-    private TextField txtSearch;
+public class FXMLEditShipingController implements Initializable {
 
     /**
      * Initializes the controller class.
@@ -29,10 +23,5 @@ public class FXMLSearchController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-
-    @FXML
-    private void myAccount(ActionEvent event) {
-        Bookfy.getMainWindowController().displayViewProfile();
-    }
     
 }

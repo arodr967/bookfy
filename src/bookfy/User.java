@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -34,7 +35,7 @@ public class User {
         this.email = email;
         this.home = home;
         
-        saveBasicUserData(password);
+        //saveBasicUserData(password);
     }
 
     //user already exist so load it from the database
@@ -44,6 +45,10 @@ public class User {
         loadUserData();
     }
 
+    public String getFullName(){
+        return getFirstName() + " " + getLastName();
+    }
+    
     public String getFirstName() {
         return firstName;
     }
@@ -137,8 +142,10 @@ public class User {
         }
     }
     
-    private void loadCreditCards(){
-        String query = "SELECT FullName, Number, Expiration, CVV, AddressLine1, AddressLine2, City, State, Country FROM creditcard where UserID = \'" + userName + "\'";
+    public void loadCreditCards(){
+        creditCards.clear();
+        
+        String query = "SELECT FullName, CardNumber, Expiration, CVV, AddressLine1, AddressLine2, City, State, Country, ccID FROM creditcard where UserID = \'" + userName + "\' AND LazyDelete = '0'";
 
         ResultSet rs = Bookfy.getDatabaseHandler().execQuery(query);
 
@@ -153,8 +160,9 @@ public class User {
                 String city = rs.getString(7);
                 String state = rs.getString(8);
                 String country = rs.getString(9);
+                int ccID = rs.getInt(10);
                 Address billing = new Address(fullname, addressLine1, addressLine2, city, state, 0, country);
-                CreditCard card = new CreditCard(fullname, number, expiration, cvv, billing);
+                CreditCard card = new CreditCard(ccID, fullname, number, expiration, cvv, billing);
                 
                 creditCards.add(card);
             }
@@ -167,8 +175,36 @@ public class User {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    public void updateBasicUserData(String password){
+    public void updateShippingToDB(){
+        String query = "SELECT userID FROM shipping WHERE UserID= \'" + userName + "\'";
+
+        ResultSet rs = Bookfy.getDatabaseHandler().execQuery(query);
+
+        try {
+            String command;
+            if(rs.next()){
+                command = "UPDATE shipping "
+                    + "SET FullName ='"+ shipping.getName() + "',"
+                    + "AddressLine1 ='"+ shipping.getAddressLine1() + "',"
+                    + "AddressLine2='"+ shipping.getAddressLine2() + "',"
+                    + "City='"+ shipping.getCity() + "',"
+                    + "State='"+ shipping.getState() + "',"
+                    + "Country='"+ shipping.getCountry() + "'"
+                    + " WHERE UserID='" + getUserName() + "'";
+            }
+            else{
+                command = "INSERT into shipping(UserID, FullName, AddressLine1, AddressLine2, City, State, Country) "
+                    + " VALUES('" + Bookfy.getUser().getUserName() + "', '" + shipping.getName() + "', '" + shipping.getAddressLine1() + "', '" + shipping.getAddressLine2() + "', '" + shipping.getCity() + "', '" + shipping.getState() + "', '" + shipping.getCountry() + "')";
+            }
+            Bookfy.getDatabaseHandler().execAction(command);
+            JOptionPane.showMessageDialog(null, "The shipping address has been updated.", "Bookfy", JOptionPane.INFORMATION_MESSAGE);
+            Bookfy.getMainWindowController().displayViewProfile();
+        } catch (SQLException ex) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+        }  
+    }
     
+    public void updateBasicUserData(String password){
         String query = "UPDATE user "
                     + "SET FirstName='"+getFirstName() +"',"
                     + "LastName='"+getLastName() + "',"
@@ -180,7 +216,11 @@ public class User {
                     + "password='" + password 
                     + "' WHERE UserID='" + getUserName() + "';";
         
-       
        Bookfy.getDatabaseHandler().execAction(query);
+    }
+    
+    public void deactivate(){
+         String query = "UPDATE user SET LazyDelete = '" + 1 + "' WHERE UserID='" + getUserName() + "';";
+         Bookfy.getDatabaseHandler().execAction(query);
     }
 }

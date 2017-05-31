@@ -19,13 +19,13 @@ public class Address {
     private String country;
 
     public Address(String name, String address, String address1, String city, String state, int zipcode, String country) {
-        this.name = name;
-        this.addressLine1 = address;
-        this.addressLine2 = address1;
-        this.city = city;
-        this.state = state;
+        this.name = (name == null) ? "John Smith" : name;
+        this.addressLine1 = (address == null) ? "ABC Street" : address;
+        this.addressLine2 = (address1 == null) ? "" : address1;
+        this.city = (city == null) ? "" : city;
+        this.state = (state == null) ? "" : state;
         this.zipcode = zipcode;
-        this.country = country;
+        this.country = (country == null) ? "" : country;
     }
 
     public String getName() {
@@ -96,7 +96,7 @@ public class Address {
         return output;
     }
     
-    public String formatterLong(){
+    public String formattedLong(){
         String output = name + "\n" + addressLine1 + "\n";
         
         if(addressLine2 != null && !addressLine2.equalsIgnoreCase("")){
@@ -110,7 +110,7 @@ public class Address {
 
     @Override
     public String toString() {
-        return formatterLong();
+        return formattedLong();
     }
 
     

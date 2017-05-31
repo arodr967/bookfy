@@ -15,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -115,7 +116,8 @@ public class FXMLEditAccountController implements Initializable {
             userUpdate.updateBasicUserData(passwordTextField.getText());
             user = userUpdate;
             address = addressUpdate;
-            Bookfy.getMainWindowController().displayHome(user);
+            Bookfy.setUser(user);
+            Bookfy.getMainWindowController().displayViewProfile();
             
         } else if (!addressFieldsCheck() & inputValidation() & passwordFlag) {
             User userUpdate = new User(firstNameTextField.getText(),
@@ -126,7 +128,8 @@ public class FXMLEditAccountController implements Initializable {
                                        address);
             userUpdate.updateBasicUserData(passwordTextField.getText());
             user = userUpdate;
-            Bookfy.getMainWindowController().displayHome(user);
+            Bookfy.setUser(user);
+            Bookfy.getMainWindowController().displayViewProfile();
         }
 
     }
@@ -168,7 +171,7 @@ public class FXMLEditAccountController implements Initializable {
 
     @FXML
     private void cancel(ActionEvent event) {
-        Bookfy.getMainWindowController().displayHome(user);
+        Bookfy.getMainWindowController().displayViewProfile();
     }
 
     private void getAccount()  {
@@ -183,5 +186,16 @@ public class FXMLEditAccountController implements Initializable {
             CountryTextField.setText(address.getCountry());
             userNameTextField.setText(user.getUserName());            
         
+    }
+
+    //Roger Boza
+    @FXML
+    private void deactivateAccount(ActionEvent event) {
+        int answer = JOptionPane.showConfirmDialog(null, "Are you sure you want to deactivate the account? This cannot be undone later.", "Bookfy", JOptionPane.YES_NO_OPTION);
+        if(answer == JOptionPane.YES_OPTION){
+            user.deactivate();
+            JOptionPane.showMessageDialog(null, "The account has been deactivated.", "Bookfy", JOptionPane.INFORMATION_MESSAGE);
+            Bookfy.getMainWindowController().displayLogIn();
+        }    
     }
 }

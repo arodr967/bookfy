@@ -56,7 +56,7 @@ public class FXMLMainController implements Initializable {
         }
     }
     
-    public void displayAccount(){
+    public void displayCreateAccount(){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/bookfy/FXMLCreateAccount.fxml"));
             AnchorPane account = loader.load();
@@ -67,9 +67,58 @@ public class FXMLMainController implements Initializable {
         }
     }
     
-    public void viewProfile(){
+    public void displayEditAccount(){
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/bookfy/FXMLViewUserProfile.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/bookfy/FXMLEditAccount.fxml"));
+            AnchorPane editAccount = loader.load();
+
+            showContent(editAccount);
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLMainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void displayEditShippingInfo(){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/bookfy/FXMLEditShipping.fxml"));
+            AnchorPane shippingInfo = loader.load();
+
+            showContent(shippingInfo);
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLMainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void displayCreditCard(){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/bookfy/FXMLEditShipping.fxml"));
+            loader.setController(new FXMLCreditCardController());
+            AnchorPane creditCard = loader.load();
+
+            showContent(creditCard);
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLMainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void displayEditCard(CreditCard card){
+        try {
+            FXMLCreditCardController controller = new FXMLCreditCardController(card);
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/bookfy/FXMLCreditCard.fxml"));
+            loader.setController(controller);
+            
+            AnchorPane creditCard = loader.load();
+            
+            showContent(creditCard);
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLMainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void displayViewProfile(){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/bookfy/FXMLViewUser.fxml"));
             AnchorPane account = loader.load();
 
             showContent(account);

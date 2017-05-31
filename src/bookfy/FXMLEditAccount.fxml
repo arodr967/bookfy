@@ -6,7 +6,6 @@
 <?import java.lang.String?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="600.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bookfy.FXMLEditAccountController">
@@ -22,14 +21,12 @@
       <JFXPasswordField fx:id="passwordTextField" accessibleRole="PASSWORD_FIELD" labelFloat="true" layoutX="47.0" layoutY="564.0" prefHeight="29.0" prefWidth="500.0" promptText="Password" />
       <JFXPasswordField fx:id="verifyPasswordTextField" accessibleRole="PASSWORD_FIELD" labelFloat="true" layoutX="47.0" layoutY="643.0" prefHeight="29.0" prefWidth="500.0" promptText="Verify Password:" />
       <JFXButton fx:id="saveButton" defaultButton="true" layoutX="48.0" layoutY="732.0" onMouseClicked="#saveListener" prefHeight="31.0" prefWidth="106.0" styleClass="button-raised" text="SAVE" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" disable="true" fill="#7a7f83" height="29.0" layoutX="14.0" layoutY="14.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="564.0" />
-      <Label layoutX="26.0" layoutY="18.0" text="ABOUT YOU" textFill="WHITE">
+      <Label layoutX="26.0" layoutY="18.0" prefHeight="31.0" prefWidth="560.0" styleClass="headerlabel" text="ABOUT YOU" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" disable="true" fill="#7a7f83" height="29.0" layoutX="14.0" layoutY="424.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="564.0" />
-      <Label layoutX="26.0" layoutY="428.0" text="CREDENTIALS" textFill="WHITE">
+      <Label layoutX="26.0" layoutY="428.0" prefHeight="31.0" prefWidth="560.0" styleClass="headerlabel" text="CREDENTIALS" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
@@ -42,7 +39,7 @@
       <JFXButton fx:id="cancelButton" defaultButton="true" layoutX="176.0" layoutY="732.0" onAction="#cancel" onMouseClicked="#saveListener" prefHeight="31.0" prefWidth="106.0" styleClass="button-raised" text="CANCEL" />
       <Label fx:id="addressMissingInputLabel" layoutX="378.0" layoutY="379.0" text=" " />
       <Label fx:id="passwordMismatchLabel" layoutX="46.0" layoutY="696.0" />
-      <JFXButton layoutX="382.0" layoutY="732.0" prefHeight="31.0" prefWidth="169.0" stylesheets="@styles.css" text="Deactivate Account">
+      <JFXButton layoutX="382.0" layoutY="732.0" onAction="#deactivateAccount" prefHeight="31.0" prefWidth="169.0" stylesheets="@styles.css" text="Deactivate Account">
          <styleClass>
             <String fx:value="button-flat" />
             <String fx:value="button-raised" />
