@@ -69,7 +69,7 @@ public class FXMLMainController implements Initializable {
     
     public void viewProfile(){
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/bookfy/FXMLViewProfile.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/bookfy/FXMLViewUserProfile.fxml"));
             AnchorPane account = loader.load();
 
             showContent(account);

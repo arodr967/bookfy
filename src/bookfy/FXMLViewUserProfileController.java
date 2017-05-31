@@ -16,7 +16,7 @@ import javafx.scene.control.Label;
  *
  * @author Roger Boza
  */
-public class FXMLViewProfileController implements Initializable {
+public class FXMLViewUserProfileController implements Initializable {
 
     @FXML
     private Label lblHomeAddress;
