@@ -83,6 +83,35 @@ public class Address {
     public void setCountry(String country) {
         this.country = country;
     }
+    
+    public String formattedShort(){
+        String output = addressLine1 + "\n";
+        
+        if(addressLine2 != null && !addressLine2.equalsIgnoreCase("")){
+            output += addressLine2 + "\n";
+        }
+        
+        output += city + ", " + state.toUpperCase() + ", " + country.toUpperCase();
+        
+        return output;
+    }
+    
+    public String formatterLong(){
+        String output = name + "\n" + addressLine1 + "\n";
+        
+        if(addressLine2 != null && !addressLine2.equalsIgnoreCase("")){
+            output += addressLine2 + "\n";
+        }
+        
+        output += city + ", " + state.toUpperCase() + ", " + country.toUpperCase();
+        
+        return output;
+    }
+
+    @Override
+    public String toString() {
+        return formatterLong();
+    }
 
     
     

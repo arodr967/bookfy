@@ -166,4 +166,21 @@ public class User {
     private void saveBasicUserData(String password) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    public void updateBasicUserData(String password){
+    
+        String query = "UPDATE user "
+                    + "SET FirstName='"+getFirstName() +"',"
+                    + "LastName='"+getLastName() + "',"
+                    + "email='"+ getEmail() + "',"
+                    + "AddressLine='"+ home.getAddressLine1() + "',"
+                    + "City='"+ home.getCity() + "',"
+                    + "State='"+ home.getState() + "',"
+                    + "Country='"+ home.getCountry() + "',"
+                    + "password='" + password 
+                    + "' WHERE UserID='" + getUserName() + "';";
+        
+       
+       Bookfy.getDatabaseHandler().execAction(query);
+    }
 }

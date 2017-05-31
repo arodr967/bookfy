@@ -89,6 +89,19 @@ and open the template in the editor.
    -fx-padding: 5 5 5 10;
 }
 
+.emaillabel {
+   -fx-text-fill: #f44336;
+   -fx-font-weight: bold;
+   -fx-font-style: italic;
+   -fx-font-size: 20;
+}
+
+.namelabel {
+   -fx-text-fill: black;
+   -fx-font-weight: bold;
+   -fx-font-size: 20;
+}
+
 /*******************************************************************************
  *                                                                             *
  * Search			                       			       *

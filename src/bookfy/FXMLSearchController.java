@@ -32,7 +32,7 @@ public class FXMLSearchController implements Initializable {
 
     @FXML
     private void myAccount(ActionEvent event) {
-        Bookfy.getMainWindowController().displayAccount();
+        Bookfy.getMainWindowController().viewProfile();
     }
     
 }
