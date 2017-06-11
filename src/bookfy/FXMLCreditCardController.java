@@ -1,4 +1,4 @@
-/*
+   /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -24,6 +24,7 @@ import java.util.*;
 public class FXMLCreditCardController implements Initializable {
     private CreditCard activeCard; //added by Roger Boza
     @FXML
+  
     private JFXButton btnAction;
     @FXML
     private JFXButton btnDeleteCard;
@@ -32,11 +33,10 @@ public class FXMLCreditCardController implements Initializable {
     public FXMLCreditCardController(CreditCard activeCard) {
         this.activeCard = activeCard;
     }
-    
+
     public FXMLCreditCardController() {
         //nothing for now
     }//end Roger Boza
-
     
     
     @FXML
@@ -71,24 +71,21 @@ public class FXMLCreditCardController implements Initializable {
     
     //address
     boolean controlA = true;
-    boolean controlB = true;
-    boolean controlC = true;
-    boolean controlD = true;
     
     //optional address
     boolean optAddressA = true;
-    boolean optAddressB = true;
-    boolean optAddressC = true;
-    boolean optAddressD = true;
     
     //city validation
     boolean cityValidation = true;
     
     //state validation
-    boolean stateValidation = true; //false; you had it at false and never set it to true
+    boolean stateValidation = true;
     
     //country
-    boolean countryValidation = true; //false; you had it at false and never set it to true
+    boolean countryValidation = true;
+    
+    //credit card
+    boolean creditValidation = true;
     
     //credit card helper (luhn algorithm)
     ArrayList<Integer> odd_arraylist = new ArrayList<Integer>();	
@@ -118,15 +115,14 @@ public class FXMLCreditCardController implements Initializable {
             btnDeleteCard.setVisible(false);
             btnAction.setText("SAVE");
         }//end Roger Boza
-        
         comboMonth.getItems().addAll("January","February","March", "April", "May", "June",
                 "July",  "August", "September", "October", "November", "December");
         
         comboYear.getItems().addAll("2017","2018","2019","2020","2021","2022","2023",
                         "2024","2025","2026","2027","2028","2029","2030");        
     }    
-
-    //Roger Boza
+         
+//Roger Boza
     private String monthToNumber(String month){
         switch(month){
             case "January":
@@ -190,8 +186,19 @@ public class FXMLCreditCardController implements Initializable {
     }
     //end Roger Boza
     
+    
+    
     @FXML
     private void saveButtonMethod(ActionEvent event) {
+        
+        isName = true;
+        ccvValidation = true;
+        controlA = true;
+        optAddressA = true;
+        cityValidation = true;
+        stateValidation = true;
+        countryValidation = true;
+        creditValidation = true;
         
         
         //get the name os the customer
@@ -200,20 +207,45 @@ public class FXMLCreditCardController implements Initializable {
         if(nameVerification.length<1){
             isName = false;
             JOptionPane.showMessageDialog(null,"Name should be entered");
+        }else if(nameVerification.length==1){
+                //company name
+     
+                if(nameVerification[0].equalsIgnoreCase("")){
+                    isName = false;
+                    JOptionPane.showMessageDialog(null,"Error, Name is empty");
+                }
+                if(nameVerification[0].length()>=10){
+                
+                    //error, the name should only contain less than 10 characters
+                    isName = false;
+                    JOptionPane.showMessageDialog(null,"First Name Has Too many words");
+                }             
+                
+                for(int k=0;k<nameVerification[0].length();k++){
+                
+                    char f = nameVerification[0].charAt(k);
+                
+                    if(!Character.isLetter(f)){
+                        JOptionPane.showMessageDialog(null,"first name should only contain letters");
+                        isName = false;
+                        break;
+                    }
+                } //end of for
+       
         }else{
         
             if(nameVerification.length != 2){
                 //error the name is of the format name_lastname_others 
                 //which is wrong
                 isName = false;
-                JOptionPane.showMessageDialog(null,"Name should be in the format 'Name + Last Name'");
+                JOptionPane.showMessageDialog(null,"Please write your Name And Last Name");
             }else{
             
                 if(nameVerification[0].length()>=10 || nameVerification[1].length()>=10){
                 
                     //error, the name should only contain less than 10 characters
                     isName = false;
-                    JOptionPane.showMessageDialog(null,"first name has too many");
+                    JOptionPane.showMessageDialog(null,"first name has too many words");
                 }             
                 
                 for(int k=0;k<nameVerification[0].length();k++){
@@ -239,7 +271,12 @@ public class FXMLCreditCardController implements Initializable {
                 } //end of for 2
             } //end of else 
         }//end of else(big) ((nameVerification))
-  
+ 
+        //if(isName){
+          //JOptionPane.showMessageDialog(null,"hey isName is true");  
+        //}
+            
+        
         //ccv code check
         if(ccvCredit.getText().length()<1){
             ccvValidation = false;
@@ -262,315 +299,224 @@ public class FXMLCreditCardController implements Initializable {
             } //end of else (small)
         } //end of else (big) (ccv)
         
+        //if(ccvValidation){
+          //  JOptionPane.showMessageDialog(null,"CCV is GOOD");
+        //}
+        
         //address verification
         
         String[] addressVerification = addressCreditCard.getText().split(" ");
         
         if(addressVerification.length<1){
-            JOptionPane.showMessageDialog(null,"You must enter the address");
+            controlA = false;
+            JOptionPane.showMessageDialog(null,"You must enter your address");
         }else{
         
-            if(addressVerification.length != 4){
-                //WRONG address format
-                JOptionPane.showMessageDialog(null,"Wrong Address Format");
-
-            }else{
-                
-                //JOptionPane.showMessageDialog(null,"hey");
-                
-                char stringa = addressVerification[0].charAt(0);
-                char stringb = addressVerification[1].charAt(0);
-                char stringc = addressVerification[2].charAt(0);
-                char stringd = addressVerification[3].charAt(0);
-                
-                //JOptionPane.showMessageDialog(null,stringa + " " + stringb + " "+ stringc + " " +
-                  //      stringd);
-                  String test = "~ ! @ # $ % ^ & * ( ) _ + - = `";
+            if(addressVerification.length == 3 || addressVerification.length==4){
                   
-                if(addressVerification[0].length()<=5 && addressVerification[1].length()<=2
-                    && addressVerification[2].length()<=5 &&
-                   addressVerification[3].length()<=2){
+                //JOptionPane.showMessageDialog(null,"hey");
+                String test = "~ ! @ # $ % ^ & * ( ) _ + - = `";
+                
+                for(int i=0;i<addressVerification.length;i++){
                     
-                    for(int i=0;i<addressVerification[0].length();i++){
+                    String tmp = addressVerification[i];  //86
+                    //JOptionPane.showMessageDialog(null, "tmp is: " + tmp + ":");
+                    
+                    if(tmp.length()<=1){
+                        JOptionPane.showMessageDialog(null, "Word in address are too short");
+                        controlA = false;
+                        break;
+                    }
+                    
+                    if(tmp.length()>6){
+                        JOptionPane.showMessageDialog(null, "Words in address are too LONG");
+                        controlA = false;
+                        break;
+                    }
+                    for(int k=0;k<addressVerification[i].length();k++){
                         
-                        int h = test.indexOf(addressVerification[0].charAt(i));
+                        char partition = tmp.charAt(k); //8 6
+                        //JOptionPane.showMessageDialog(null, "partition: " + partition);
+                        
+                        int h = test.indexOf(partition);
                         
                         if(h != -1){
-                            JOptionPane.showMessageDialog(null,"No Symbols");
+                            JOptionPane.showMessageDialog(null,"Error: No Symbols Allowed in Address");
                             controlA = false;
                             break;
                         }else{
-                            if(!Character.isDigit(stringa)){
+                            //the first word in address must be a NUMBER
+                            if(i==0 && (!Character.isDigit(partition))){
                                 controlA = false;
                                 break;
                             }
-                        }                 
-                    } //end of for 1
-
-                    for(int i=0;i<addressVerification[1].length();i++){
-                        
-                        int h = test.indexOf(addressVerification[1].charAt(i));
-                        
-                        if(h != -1){
-                            JOptionPane.showMessageDialog(null,"No Symbols");
-                            controlB = false;
-                            break;
-                        }else{
-                            
-                            if(!Character.isLetter(stringb)){
-                                controlB = false;
+                            if(i==1 && (!Character.isLetter(partition))){
+                                controlA = false;
                                 break;
                             }
-                        }                 
-                    } //end of for 2
-
-                    for(int i=0;i<addressVerification[2].length();i++){
-                        
-                        int h = test.indexOf(addressVerification[2].charAt(i));
-                        
-                        if(h != -1){
-                            JOptionPane.showMessageDialog(null,"No Symbols");
-                            controlC = false;
-                            break;
-                        }else{
-                            if((!Character.isDigit(stringc) && !Character.isLetter(stringc))){
-                                controlC = false;
-                                break;
-                            }
-                        }                 
-                    } //end of for 3
+                        }
+                    } //end of for (inner)
+                } //end of for (outer)
+            }else{
+               //address is not in a good format because doesn't have length 3 or 4
+               JOptionPane.showMessageDialog(null,"Address is Not in a good format");
+               controlA=false;
+            }
+        }//end of else (big)
                     
-                    for(int i=0;i<addressVerification[3].length();i++){
-                        
-                        int h = test.indexOf(addressVerification[3].charAt(i));
-                        
-                        if(h != -1){
-                            JOptionPane.showMessageDialog(null,"No Symbols");
-                            controlD = false;
-                            break;
-                        }else{
-                            
-                            if(!Character.isLetter(stringd)){
-                                controlD = false;
-                                break;
-                            }
-                        }                 
-                    } //end of for 4
-                    
-                    if(controlA && controlB && controlC && controlD){
-                        JOptionPane.showMessageDialog(null,"good address");
-                    }else{
-                        JOptionPane.showMessageDialog(null,"Wrong Address Format, try again");
-                    }
-                }else{
-                    //error too long address
-                    JOptionPane.showMessageDialog(null,"Error, address is too long/not good format");
-                    controlA = false;
-                    controlB = false;
-                    controlC = false;
-                    controlD = false;
-                }
-            } //end of else (small)
-        } //end of else (big)(length<1) (address)
-        
+        //if(controlA){
+          //  JOptionPane.showMessageDialog(null,"Good Address");
+        //}
+                
         
         //address (optional)
         String[] addressOptVerification = adress2CreditCard.getText().split(" ");
         
-            if(addressOptVerification.length != 4){
-                //WRONG address format
+        String test = "~ ! @ $ % ^ & * ( ) _ + - = `";
+        
+        if(addressOptVerification.length<1){
+            //address 2 is optional
+            optAddressA = true;
+        }else{
                 
-                if(addressOptVerification.length>=1 && !addressOptVerification[0].equalsIgnoreCase("")){
- 
-                    //set to false
-                    optAddressA = false;
-                    optAddressB = false;
-                    optAddressC = false;
-                    optAddressD = false;
-                    
-                    JOptionPane.showMessageDialog(null,"Wrong Optional Address Formatttttt");
-                    //JOptionPane.showMessageDialog(null,addressOptVerification.length);
-                }
+            
+            if(addressOptVerification.length >3){
+                JOptionPane.showMessageDialog(null, "Address2 is too long");
+                optAddressA = false;
             }else{
-              
-                char stringa = addressOptVerification[0].charAt(0);
-                char stringb = addressOptVerification[1].charAt(0);
-                char stringc = addressOptVerification[2].charAt(0);
-                char stringd = addressOptVerification[3].charAt(0);
                 
-                String test = "~ ! @ # $ % ^ & * ( ) _ + - = `";
-                  
-                if(addressOptVerification[0].length()<=5 && addressOptVerification[1].length()<=2
-                    && addressOptVerification[2].length()<=5 &&
-                   addressOptVerification[3].length()<=2){
+                for(int i=0;i<addressOptVerification.length;i++){
+                
+                    String temp = addressOptVerification[i]; 
+                
+                    if(temp.length()>10){
+                        JOptionPane.showMessageDialog(null, "Address2 is too long");
+                        optAddressA = false;
+                    }
                     
-                    for(int i=0;i<addressOptVerification[0].length();i++){
+                    for(int k=0;k<temp.length();k++){
                         
-                        int h = test.indexOf(addressOptVerification[0].charAt(i));
+                        char partition = temp.charAt(k);    
+                        int h = test.indexOf(partition);
                         
+                        //no symbols except # are allowed
                         if(h != -1){
-                            JOptionPane.showMessageDialog(null,"No Symbols In Address Optional");
+                          
+                            JOptionPane.showMessageDialog(null,"Invalid Address2");
                             optAddressA = false;
                             break;
-                        }else{
-                            if(!Character.isDigit(stringa)){
-                                optAddressA = false;
-                                break;
-                            }
-                        }                 
-                    } //end of for 1
+                        } 
+                    } //end of for (inner)   
+                 
+                }  //end of for (outer)               
+            } //end of else (address 2)    
+        } //end of else (big)
 
-                    for(int i=0;i<addressOptVerification[1].length();i++){
-                        
-                        int h = test.indexOf(addressOptVerification[1].charAt(i));
-                        JOptionPane.showMessageDialog(null,"testing h " + h);
-                        
-                        if(h != -1){
-                            JOptionPane.showMessageDialog(null,"No Symbols");
-                            optAddressB = false;
-                            break;
-                        }else{
-                            if(!Character.isLetter(stringb)){
-                                optAddressB = false;
-                                break;
-                            }
-                        }                 
-                    } //end of for 2
-
-                    for(int i=0;i<addressOptVerification[2].length();i++){
-                        
-                        int h = test.indexOf(addressOptVerification[2].charAt(i));
-                        
-                        if(h != -1){
-                            JOptionPane.showMessageDialog(null,"No Symbols");
-                            optAddressC = false;
-                            break;
-                        }else{
-                            if((!Character.isDigit(stringc) && !Character.isLetter(stringc))){
-                                optAddressC = false;
-                                break;
-                            }
-                        }                 
-                    } //end of for 3
-                    
-                    for(int i=0;i<addressOptVerification[3].length();i++){
-                        
-                        int h = test.indexOf(addressOptVerification[3].charAt(i));
-                        
-                        if(h != -1){
-                            JOptionPane.showMessageDialog(null,"No Symbols");
-                            optAddressD = false;
-                            break;
-                        }else{
-                            
-                            if(!Character.isLetter(stringd)){
-                                optAddressD = false;
-                                break;
-                            }
-                        }                 
-                    } //end of for 4
-                    
-                    if(optAddressA && optAddressB && optAddressC && optAddressD){
-                        JOptionPane.showMessageDialog(null,"good optional address");
-                    }else{
-                        JOptionPane.showMessageDialog(null,"Wrong optional Address Format");
-                        optAddressA = false;
-                        optAddressB = false;
-                        optAddressC = false;
-                        optAddressD = false;
-                    }
-                }else{
-                    //error too long address
-                    JOptionPane.showMessageDialog(null,"Error, optional address is too long/not good format");
-                    optAddressA = false;
-                    optAddressB = false;
-                    optAddressC = false;
-                    optAddressD = false;
-                }
-        } //end of else (big)(length != 4) (optional address)
+        //if(optAddressA){
+            //JOptionPane.showMessageDialog(null,"Good Optional Address");
+        //}
         
         //city validation
         String[] cityVerification = cityCreditCard.getText().split(" ");
         
-        if(cityVerification.length != 1){
-            //WRONG city format
-            if(cityVerification[0].equalsIgnoreCase("")){
-                JOptionPane.showMessageDialog(null,"This field is required");
-            }else{
-                JOptionPane.showMessageDialog(null,"Wrong format");
-            }
-            cityValidation = false;
-        }else{
+        if(cityVerification.length < 1){
             
-            if(cityVerification[0].length()>=1 && cityVerification[0].length()<=10){
+            cityValidation = false;
+            JOptionPane.showMessageDialog(null,"Invalid City Formatt");
+        }else{
+              
+                if(cityVerification.length>=3){
+                    cityValidation = false;
+                    JOptionPane.showMessageDialog(null,"City has too many letters");
+                }
                 
-                for(int i=0;i<cityVerification[0].length();i++){
+                for(int i=0;i<cityVerification.length;i++){
                     
-                    char temp = cityVerification[0].charAt(i);
+                    String temp = cityVerification[i];
                     //JOptionPane.showMessageDialog(null,"this is temp: " + temp);
                     
-                    if(!Character.isLetter(temp)){
-                        //error city have either numbers or symbols
-                        JOptionPane.showMessageDialog(null,"city has symbols/numbers");
+                    if(temp.length()<1 || temp.length()>13){
                         cityValidation = false;
-                    }                 
+                        JOptionPane.showMessageDialog(null,"City is empty or too long");
+                    }
+                    
+                    for(int k=0;k<temp.length();k++){
+                        
+                         if(!Character.isLetter(temp.charAt(k))){
+                            //error city have either numbers or symbols
+                            JOptionPane.showMessageDialog(null,"city has symbols/numbers");
+                            cityValidation = false;
+                        }      
+                    }
                 } //end of for
-            }
-        } //end of else (city)
+        }
         
+        //if(cityValidation){
+          //  JOptionPane.showMessageDialog(null,"city is valid");
+        //}
+        
+        //state
         String[] stateVerification = stateCreditCard.getText().split(" ");
+        
+        //JOptionPane.showMessageDialog(null,stateVerification.length);
         
         if(stateVerification.length <1){
            
-                JOptionPane.showMessageDialog(null,"This field is required");
+                JOptionPane.showMessageDialog(null,"state field is required");
                 stateValidation = false;
         }else{
             
-                if(stateVerification.length==1){
+                if(stateVerification.length>=3){
                     
-                    if(stateVerification[0].length()==2){
-                
-                        for(int i=0;i<stateVerification[0].length();i++){
-                    
-                            char temp = stateVerification[0].charAt(i);
-                    
-                            if(!Character.isLetter(temp)){
-                                //error state have either numbers or symbols
-                                JOptionPane.showMessageDialog(null,"state has symbols/numbers");
-                                stateValidation = false;
-                            }   
-                        } //end of for
-                    }else{   
-                        JOptionPane.showMessageDialog(null,"too many characters");
-                        stateValidation = false;
-                    }
+                    stateValidation = false;
+                    JOptionPane.showMessageDialog(null,"State has too many letters");
                 }else{
-                    JOptionPane.showMessageDialog(null,"state has too many letters");
+                                   
+                        for(int i=0;i<stateVerification.length;i++){
+                    
+                           String temp = stateVerification[i];
+
+                           if(temp.length()<1 || temp.length()>13){
+                               stateValidation = false;
+                                JOptionPane.showMessageDialog(null,"State is empty or too long");
+                           }
+                           
+                           for(int k=0;k<temp.length();k++){
+                                
+                                if(!Character.isLetter(temp.charAt(k))){
+                                    //error state have either numbers or symbols
+                                    JOptionPane.showMessageDialog(null,"state has symbols/numbers");
+                                    stateValidation = false;
+                                }      
+                           } //end of for inner
+                        }   
                 }
-            }
-        
- 
+        } //end of else (big)
+            
+        //if(stateValidation){
+                //       JOptionPane.showMessageDialog(null,"state is valid");    
+        //}
         
         //country
         String[] countryVerification = countryCreditCard.getText().split(" ");
         
-        if((countryVerification.length != 2 && countryVerification.length != 1)){
-           //error it's in the wrong format
+        //JOptionPane.showMessageDialog(null,countryVerification[0] + "----" + countryVerification.length);
+        
+        if(countryVerification.length < 1){
+           
            JOptionPane.showMessageDialog(null,"Wrong Country format");
            countryValidation = false;
         }else{
         
             for(int i=0;i<countryVerification.length;i++){
                 
-                if(countryVerification[i].length()>=10){
-                    //error, the country should only contain less than 10 characters
-                    JOptionPane.showMessageDialog(null,"country has too many letters");
+                String temp = countryVerification[i];
+  
+                if(temp.length() < 1 || temp.length()>13){
+                    JOptionPane.showMessageDialog(null,"country field is empty or too long");
                     countryValidation = false;
-                }else{
-                
-                    String temp = countryVerification[i];
-                    
-                    for(int k=0;k<temp.length();k++){
+                }    
+                for(int k=0;k<temp.length();k++){
                 
                         char f = temp.charAt(k);
                 
@@ -579,111 +525,125 @@ public class FXMLCreditCardController implements Initializable {
                             countryValidation = false;
                             break;
                         }
-                    } //end of for (inner) 
-                } //end of else (inner)          
-            } //end of for (outer)
-        } //end of else (big)
+                } //end of for (inner) 
+           } //end of else (inner)          
+        } //end of for (outer)
+        
+        //if(countryValidation){
+          //                  JOptionPane.showMessageDialog(null,"country is valid");
+        //}
         
         //credit card verification
-        
         //variables (tools)
 	String creditCardNumber = cardNumber.getText();
-	Integer[] numbers = new Integer[creditCardNumber.length()];
-	int total_numbers = 0;
-	boolean isTrue= true;
-		
-	if(creditCardNumber.length()!=16){
-            JOptionPane.showMessageDialog(null, "Sorry, Card is NOT valid");
-	}else{		
-            //converting into integer array so we can do calculations later
-            for(int i=0;i<creditCardNumber.length();i++){
-				
-                numbers[i] = Integer.parseInt(creditCardNumber.substring(i, i+1));		
-            }
+        
+        for(int i=0;i<creditCardNumber.length();i++){
             
-            //separating numbers and adding them in order to lists
-            for(int i=0;i<numbers.length;i++){
-				
-		if(isTrue){
-                    even_arraylist.add(numbers[i]);
-                    isTrue=false;
-		}else{
-                    odd_arraylist.add(numbers[i]);
-                    isTrue=true;
-		}
-				
-            }//end of loop
-
-            //converting lists to arrays so we can apply 
-            //the 3rd step of luhn's algorithm
-            Integer[] odd = odd_arraylist.toArray(new Integer[odd_arraylist.size()]);	
-            Integer[] even = even_arraylist.toArray(new Integer[even_arraylist.size()]);
+            char rev = creditCardNumber.charAt(i);
+            
+            if(!Character.isDigit(rev)){
+               JOptionPane.showMessageDialog(null,"Only Numbers Are Allowed in Credit Card Number");
+               creditValidation = false;
+            }
+        }
+        if(creditValidation){
+            Integer[] numbers = new Integer[creditCardNumber.length()];
+            int total_numbers = 0;
+            boolean isTrue= true;
 		
-            //double the array of left side=(even side only)
-            for(int i=0;i<even.length;i++){
+            if(creditCardNumber.length()!=16){
+                JOptionPane.showMessageDialog(null, "Sorry, Card is NOT valid");
+                creditValidation = false;
+            }else{		
+                //converting into integer array so we can do calculations later
+                for(int i=0;i<creditCardNumber.length();i++){
 				
-                if(even[i]>=5){
-				
-                    even[i] = even[i]*2;	
-                    String temp = even[i].toString();
-                    int one = Integer.parseInt(temp.substring(0,1));
-                    int two = Integer.parseInt(temp.substring(1));	
-                    even[i] = one+two;
-				
-		}else{
-                    even[i] = even[i]*2;
+                    numbers[i] = Integer.parseInt(creditCardNumber.substring(i, i+1));		
                 }
-            }
-			
-            //add even+odd (all numbers added)
-			
-            for(int x=0;x<even.length;x++){
+            
+                //separating numbers and adding them in order to lists
+                for(int i=0;i<numbers.length;i++){
 				
-                total_numbers += even[x];
-            }
-			
-            for(int y=0;y<odd.length;y++){
+                    if(isTrue){
+                        even_arraylist.add(numbers[i]);
+                        isTrue=false;
+                    }else{
+                        odd_arraylist.add(numbers[i]);
+                        isTrue=true;
+                    }
 				
-                total_numbers += odd[y];
-            }
+                }//end of loop
+
+                //converting lists to arrays so we can apply 
+                //the 3rd step of luhn's algorithm
+                Integer[] odd = odd_arraylist.toArray(new Integer[odd_arraylist.size()]);	
+                Integer[] even = even_arraylist.toArray(new Integer[even_arraylist.size()]);
+		
+                //double the array of left side=(even side only)
+                for(int i=0;i<even.length;i++){
+				
+                    if(even[i]>=5){
+				
+                        even[i] = even[i]*2;	
+                        String temp = even[i].toString();
+                        int one = Integer.parseInt(temp.substring(0,1));
+                        int two = Integer.parseInt(temp.substring(1));	
+                        even[i] = one+two;
+				
+                    }else{
+                        even[i] = even[i]*2;
+                    }
+                }
 			
-            if(total_numbers%10==0){		
-                JOptionPane.showMessageDialog(null, "Credit Card IS Valid");
-            }else{
-                JOptionPane.showMessageDialog(null, "Credit Card is NOT Valid");
-            }
-        } //end of else(big)
+                //add even+odd (all numbers added)
+			
+                for(int x=0;x<even.length;x++){
+				
+                    total_numbers += even[x];
+                }
+			
+                for(int y=0;y<odd.length;y++){
+				
+                    total_numbers += odd[y];
+                }
+			
+                if(total_numbers%10==0){
+				
+                    JOptionPane.showMessageDialog(null, "Credit Card IS Valid");
+		
+                }else{
+                    JOptionPane.showMessageDialog(null, "Credit Card is NOT Valid");
+                    creditValidation = false;
+                }
+            } //end of else(big)
         
-        
-        /*if(isName && ccvValidation && controlA && controlB && controlC && controlD && optAddressA
+            /*if(isName && ccvValidation && controlA && controlB && controlC && controlD && optAddressA
                 && optAddressB && optAddressC && optAddressD && cityValidation && stateValidation 
                 && countryValidation){*/
         
-        //Roger Boza
-        if(isName && ccvValidation && controlA && controlB && controlC && controlD
-                && cityValidation && stateValidation && countryValidation){
+            //Roger Boza
+            if(isName && ccvValidation && controlA && cityValidation && stateValidation && countryValidation){
 
-            if(btnAction.getText().equalsIgnoreCase("update")){//update card  
-                Address billing = new Address(nameCreditCard.getText(), addressCreditCard.getText(), adress2CreditCard.getText(), cityCreditCard.getText(), stateCreditCard.getText(), 0, countryCreditCard.getText());
-                CreditCard newCard = new CreditCard(activeCard.getcCID(), nameCreditCard.getText(), creditCardNumber, monthToNumber(comboMonth.getValue()) + "/" + comboYear.getValue(), ccvCredit.getText(), billing);
-                newCard.updateCardInDB();
+                if(btnAction.getText().equalsIgnoreCase("update")){//update card  
+                    Address billing = new Address(nameCreditCard.getText(), addressCreditCard.getText(), adress2CreditCard.getText(), cityCreditCard.getText(), stateCreditCard.getText(), 0, countryCreditCard.getText());
+                    CreditCard newCard = new CreditCard(activeCard.getcCID(), nameCreditCard.getText(), creditCardNumber, monthToNumber(comboMonth.getValue()) + "/" + comboYear.getValue(), ccvCredit.getText(), billing);
+                    newCard.updateCardInDB();
 
-                Bookfy.getUser().loadCreditCards();
-                Bookfy.getMainWindowController().displayViewProfile();
-            }
-            else{//save card
-                Address billing = new Address(nameCreditCard.getText(), addressCreditCard.getText(), adress2CreditCard.getText(), cityCreditCard.getText(), stateCreditCard.getText(), 0, countryCreditCard.getText());
-                CreditCard newCard = new CreditCard(0, nameCreditCard.getText(), creditCardNumber, monthToNumber(comboMonth.getValue()) + "/" + comboYear.getValue(), ccvCredit.getText(), billing);
-                newCard.saveCardIntoDB();
+                    Bookfy.getUser().loadCreditCards();
+                    Bookfy.getMainWindowController().displayViewProfile();
+                }else{//save card
+                    Address billing = new Address(nameCreditCard.getText(), addressCreditCard.getText(), adress2CreditCard.getText(), cityCreditCard.getText(), stateCreditCard.getText(), 0, countryCreditCard.getText());
+                    CreditCard newCard = new CreditCard(0, nameCreditCard.getText(), creditCardNumber, monthToNumber(comboMonth.getValue()) + "/" + comboYear.getValue(), ccvCredit.getText(), billing);
+                    newCard.saveCardIntoDB();
 
-                Bookfy.getUser().loadCreditCards();
-                Bookfy.getMainWindowController().displayViewProfile();
-            }//end Roger Boza
+                    Bookfy.getUser().loadCreditCards();
+                    Bookfy.getMainWindowController().displayViewProfile();
+                }//end Roger Boza
             
-        }
-  
+            }
+        }//end of creditvalidation 
     } //end of method (saveButtonMethod)
-
+    
     //Roger Boza
     @FXML
     private void cancel(ActionEvent event) {
