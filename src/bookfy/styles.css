@@ -75,6 +75,11 @@ and open the template in the editor.
    -fx-background-color: white;
 }
 
+.tile {
+   -fx-background-color: lightgrey;
+   -fx-background-radius: 15 15 15 15;
+   -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
 /*******************************************************************************
  *                                                                             *
  * Labels			                       			       *
@@ -109,4 +114,49 @@ and open the template in the editor.
  ******************************************************************************/
 .search_style {
    -fx-background-color: #212121;
+}
+
+/*******************************************************************************
+ *                                                                             *
+ * Check box			                       			       *
+ *                                                                             *
+ ******************************************************************************/
+.check-box {
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+}
+
+.check-box .box {
+    -fx-background-color: white;
+    -fx-border-color: #f44336;
+    -fx-border-radius: 2px; 
+}
+
+.check-box:selected .mark {
+    -fx-background-color: white;
+}
+
+.check-box:selected .box {
+    -fx-background-color: #f44336;
+}
+
+.check-box-large {
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-font-size: 18;
+}
+
+.check-box-large .box {
+    -fx-background-color: white;
+    -fx-border-color: #f44336;
+    -fx-border-radius: 2px; 
+}
+
+.check-box-large:selected .mark {
+    -fx-background-color: white;
+}
+
+.check-box-large:selected .box {
+    -fx-background-color: #f44336;
 }

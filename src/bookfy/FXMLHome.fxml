@@ -1,16 +1,117 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Pagination?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.Rating?>
 
-
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="730.0" prefWidth="750.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="bookfy.FXMLHomeController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="730.0" prefWidth="725.0" styleClass="pane" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bookfy.FXMLHomeController">
    <children>
-      <ImageView fitHeight="706.0" fitWidth="728.0" layoutX="11.0" layoutY="11.0">
-         <image>
-            <Image url="@home.jpg" />
-         </image>
-      </ImageView>
+      <GridPane layoutX="184.0" layoutY="275.0" prefHeight="730.0" prefWidth="750.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="370.0" minWidth="10.0" prefWidth="196.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="10.0" minWidth="10.0" prefWidth="10.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="550.0" minWidth="10.0" prefWidth="550.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0">
+               <children>
+                  <Label text="Book Rating">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Rating fx:id="ratRating" scaleX="0.75" scaleY="0.75" />
+                  <Label text="Genre">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <CheckBox fx:id="chkComputer" mnemonicParsing="false" text="Computer">
+                     <VBox.margin>
+                        <Insets left="25.0" />
+                     </VBox.margin>
+                  </CheckBox>
+                  <CheckBox fx:id="chkRomance" mnemonicParsing="false" text="Romance">
+                     <VBox.margin>
+                        <Insets left="25.0" />
+                     </VBox.margin>
+                  </CheckBox>
+                  <CheckBox fx:id="chkScifi" layoutX="35.0" layoutY="117.0" mnemonicParsing="false" text="Sci-Fi">
+                     <VBox.margin>
+                        <Insets left="25.0" />
+                     </VBox.margin>
+                  </CheckBox>
+                  <CheckBox fx:id="chkHorror" mnemonicParsing="false" text="Horror">
+                     <VBox.margin>
+                        <Insets left="25.0" />
+                     </VBox.margin>
+                  </CheckBox>
+                  <CheckBox fx:id="chkMystery" mnemonicParsing="false" text="Mystery">
+                     <VBox.margin>
+                        <Insets left="25.0" />
+                     </VBox.margin>
+                  </CheckBox>
+                  <CheckBox fx:id="chkHistory" mnemonicParsing="false" text="History">
+                     <VBox.margin>
+                        <Insets left="25.0" />
+                     </VBox.margin>
+                  </CheckBox>
+                  <CheckBox fx:id="chkFiction" mnemonicParsing="false" text="Fiction">
+                     <VBox.margin>
+                        <Insets left="25.0" />
+                     </VBox.margin>
+                  </CheckBox>
+                  <CheckBox fx:id="chkFantasy" mnemonicParsing="false" text="Fantasy">
+                     <VBox.margin>
+                        <Insets left="25.0" />
+                     </VBox.margin>
+                  </CheckBox>
+                  <CheckBox fx:id="chkDrama" mnemonicParsing="false" text="Drama">
+                     <VBox.margin>
+                        <Insets left="25.0" />
+                     </VBox.margin>
+                  </CheckBox>
+                  <CheckBox fx:id="chkNonFiction" mnemonicParsing="false" text="Non-fiction">
+                     <VBox.margin>
+                        <Insets left="25.0" />
+                     </VBox.margin>
+                  </CheckBox>
+                  <CheckBox fx:id="chkTopSellers" mnemonicParsing="false" styleClass="check-box-large" text="Top Sellers">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </VBox.margin>
+                  </CheckBox>
+                  <CheckBox fx:id="chkBookfyTimes" mnemonicParsing="false" styleClass="check-box-large" text="Bookfy Times">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </CheckBox>
+               </children>
+            </VBox>
+            <Pagination fx:id="pages" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
+            <Separator orientation="VERTICAL" prefHeight="200.0" GridPane.columnIndex="1" />
+         </children>
+      </GridPane>
    </children>
+   <padding>
+      <Insets top="10.0" />
+   </padding>
 </AnchorPane>

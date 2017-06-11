@@ -19,6 +19,8 @@ public class Bookfy extends Application {
     private static final DatabaseHandler databaseHandler = DatabaseHandler.getInstance();
     private static FXMLMainController mainWindowController;
     private static User user;
+    private static String search;
+    private static FXMLHomeController home;
     
     public enum Account {
         SIGNUP,
@@ -32,6 +34,8 @@ public class Bookfy extends Application {
         Parent root = loader.load();
         
         mainWindowController = loader.getController();
+        
+        search = "";
         
         Scene scene = new Scene(root);
         
@@ -63,5 +67,21 @@ public class Bookfy extends Application {
 
     public static void setUser(User user) {
         Bookfy.user = user;
+    }
+
+    public static String getSearch() {
+        return search;
+    }
+
+    public static void setSearch(String search) {
+        Bookfy.search = search;
+    }
+
+    public static FXMLHomeController getHome() {
+        return home;
+    }
+
+    public static void setHome(FXMLHomeController home) {
+        Bookfy.home = home;
     }
 }

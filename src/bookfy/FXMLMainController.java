@@ -26,7 +26,6 @@ import javax.swing.JOptionPane;
  */
 public class FXMLMainController implements Initializable {
     private AnchorPane home;
-    
 
     @FXML
     private HBox searchPane;
@@ -45,6 +44,7 @@ public class FXMLMainController implements Initializable {
         try {
             //no user logged in
             Bookfy.setUser(null);
+            Bookfy.setHome(null);
             
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/bookfy/FXMLLogin.fxml"));
             AnchorPane logIn = loader.load();
@@ -91,7 +91,7 @@ public class FXMLMainController implements Initializable {
     
     public void displayCreditCard(){
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/bookfy/FXMLEditShipping.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/bookfy/FXMLCreditCard.fxml"));
             loader.setController(new FXMLCreditCardController());
             AnchorPane creditCard = loader.load();
 
@@ -143,7 +143,8 @@ public class FXMLMainController implements Initializable {
             
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/bookfy/FXMLHome.fxml"));
             home = loader.load();
-
+            Bookfy.setHome((FXMLHomeController)loader.getController());
+            
             showContent(home);
             displaySearch();
         } catch (IOException ex) {
