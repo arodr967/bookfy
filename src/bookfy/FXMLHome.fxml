@@ -32,7 +32,66 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Rating fx:id="ratRating" scaleX="0.75" scaleY="0.75" />
+                  <CheckBox fx:id="chk1" mnemonicParsing="false">
+                     <graphic>
+                        <Rating fx:id="rat1" rating="1.0" scaleX="0.6" scaleY="0.6">
+                           <padding>
+                              <Insets left="-45.0" />
+                           </padding>
+                        </Rating>
+                     </graphic>
+                     <VBox.margin>
+                        <Insets left="25.0" />
+                     </VBox.margin>
+                  </CheckBox>
+                  <CheckBox fx:id="chk2" layoutX="35.0" layoutY="42.0" mnemonicParsing="false">
+                     <graphic>
+                        <Rating fx:id="rat2" scaleX="0.6" scaleY="0.6">
+                           <padding>
+                              <Insets left="-45.0" />
+                           </padding>
+                        </Rating>
+                     </graphic>
+                     <VBox.margin>
+                        <Insets left="25.0" />
+                     </VBox.margin>
+                  </CheckBox>
+                  <CheckBox fx:id="chk3" layoutX="35.0" layoutY="79.0" mnemonicParsing="false">
+                     <graphic>
+                        <Rating fx:id="rat3" rating="3.0" scaleX="0.6" scaleY="0.6">
+                           <padding>
+                              <Insets left="-45.0" />
+                           </padding>
+                        </Rating>
+                     </graphic>
+                     <VBox.margin>
+                        <Insets left="25.0" />
+                     </VBox.margin>
+                  </CheckBox>
+                  <CheckBox fx:id="chk4" layoutX="10.0" layoutY="116.0" mnemonicParsing="false">
+                     <graphic>
+                        <Rating fx:id="rat4" rating="4.0" scaleX="0.6" scaleY="0.6">
+                           <padding>
+                              <Insets left="-45.0" />
+                           </padding>
+                        </Rating>
+                     </graphic>
+                     <VBox.margin>
+                        <Insets left="25.0" />
+                     </VBox.margin>
+                  </CheckBox>
+                  <CheckBox fx:id="chk5" layoutX="10.0" layoutY="116.0" mnemonicParsing="false">
+                     <graphic>
+                        <Rating fx:id="rat5" rating="5.0" scaleX="0.6" scaleY="0.6">
+                           <padding>
+                              <Insets left="-45.0" />
+                           </padding>
+                        </Rating>
+                     </graphic>
+                     <VBox.margin>
+                        <Insets left="25.0" />
+                     </VBox.margin>
+                  </CheckBox>
                   <Label text="Genre">
                      <font>
                         <Font name="System Bold" size="18.0" />

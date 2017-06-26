@@ -28,8 +28,11 @@ public class Book{
     private boolean topSeller;
     private Image image;
     private boolean bookfyTimes;
+    private String authorBio;
+    private String publisher;
+    private String releaseDate;
 
-    public Book(int ID, String title, String author, String genre, double price, String description, double rating, boolean topSeller, Image image, boolean bookfyTimes) {
+    public Book(int ID, String title, String author, String genre, double price, String description, double rating, boolean topSeller, Image image, boolean bookfyTimes, String authorBio, String publisher, String releaseDate) {
         this.ID = ID;
         this.title = title;
         this.author = author;
@@ -37,9 +40,12 @@ public class Book{
         this.price = price;
         this.description = description;
         this.rating = rating;
-        this.bookfyTimes = bookfyTimes;
         this.topSeller = topSeller;
         this.image = image;
+        this.bookfyTimes = bookfyTimes;
+        this.authorBio = authorBio;
+        this.publisher = publisher;
+        this.releaseDate = releaseDate;
     }
 
     public Book(int ID) throws InvalidBookException{
@@ -49,7 +55,7 @@ public class Book{
 
     private void loadBook() throws InvalidBookException{
         try {
-            String sql = "SELECT Title, Author, Genre, Price, description, Rating, TopSeller, BookfyTimes, BookCover from book WHERE BookId = " + ID;
+            String sql = "SELECT Title, Author, Genre, Price, description, Rating, TopSeller, BookfyTimes, BookCover, AuthorBio, Publisher, ReleaseDate from book WHERE BookId = " + ID;
             ResultSet rs = Bookfy.getDatabaseHandler().execQuery(sql);
 
             if(rs.next()){
@@ -67,6 +73,9 @@ public class Book{
                     image = new Image(is);
                     is.close();
                 }
+                authorBio = rs.getString(10);
+                publisher = rs.getString(11);
+                releaseDate = rs.getString(12);
             }
             else{
                 throw new InvalidBookException("There is no book with ID = " + ID + " in the database.");
@@ -158,6 +167,30 @@ public class Book{
 
     public void setBookfyTimes(boolean bookfyTimes) {
         this.bookfyTimes = bookfyTimes;
+    }
+
+    public String getAuthorBio() {
+        return authorBio;
+    }
+
+    public void setAuthorBio(String authorBio) {
+        this.authorBio = authorBio;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+    public String getReleaseDate() {
+        return releaseDate;
+    }
+
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
     }
     
 

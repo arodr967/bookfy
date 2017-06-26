@@ -12,7 +12,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -37,10 +36,10 @@ import org.controlsfx.control.Rating;
  */
 public class FXMLHomeController implements Initializable {
     private HashMap<String , Boolean> filters = new HashMap<String , Boolean>();
+    private HashMap<String , Boolean> ratings = new HashMap<String , Boolean>();
+    
     private ArrayList<Book> books = new ArrayList<>();
     
-    @FXML
-    private Rating ratRating;
     @FXML
     private CheckBox chkRomance;
     @FXML
@@ -67,15 +66,71 @@ public class FXMLHomeController implements Initializable {
     private Pagination pages;
     @FXML
     private CheckBox chkComputer;
+    @FXML
+    private Rating rat1;
+    @FXML
+    private Rating rat2;
+    @FXML
+    private Rating rat3;
+    @FXML
+    private Rating rat4;
+    @FXML
+    private Rating rat5;
+    @FXML
+    private CheckBox chk1;
+    @FXML
+    private CheckBox chk2;
+    @FXML
+    private CheckBox chk3;
+    @FXML
+    private CheckBox chk4;
+    @FXML
+    private CheckBox chk5;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        ratRating.ratingProperty().addListener(new ChangeListener<Number>() {
+        rat1.setDisable(true);
+        rat2.setDisable(true);
+        rat3.setDisable(true);
+        rat4.setDisable(true);
+        rat5.setDisable(true);
+        
+        
+        chk1.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
-            public void changed(ObservableValue<? extends Number> observable,Number oldValue, Number newValue) {
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                ratings.put("1", newValue);
+            }
+        });
+        
+        chk2.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                ratings.put("2", newValue);
+            }
+        });
+        
+        chk3.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                ratings.put("3", newValue);
+            }
+        });
+        
+        chk4.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                ratings.put("4", newValue);
+            }
+        });
+        
+        chk5.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                ratings.put("5", newValue);
             }
         });
         
@@ -146,15 +201,45 @@ public class FXMLHomeController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 filters.put("Non Fiction", newValue);
-                search();
+                search("");
             }
         });
         
-        search();
+        search("");
     }    
     
-    public void search(){                
-        String rating = "Rating >= " + (int)ratRating.getRating();
+    public void clear(){
+        chk1.setSelected(false);
+        chk2.setSelected(false);
+        chk3.setSelected(false);
+        chk4.setSelected(false);
+        chk5.setSelected(false);
+        chkComputer.setSelected(false);
+        chkRomance.setSelected(false);
+        chkScifi.setSelected(false);
+        chkHorror.setSelected(false);
+        chkMystery.setSelected(false);
+        chkHistory.setSelected(false);
+        chkFiction.setSelected(false);
+        chkFantasy.setSelected(false);
+        chkDrama.setSelected(false);
+        chkNonFiction.setSelected(false);
+        chkTopSellers.setSelected(false);
+        chkBookfyTimes.setSelected(false);
+    }
+    
+    public void search(String author){                
+        String rating = "";  
+        Iterator r = ratings.entrySet().iterator();
+        while (r.hasNext()) {
+            Entry pair = (Entry)r.next();
+            if((boolean)pair.getValue() == true){
+                rating += "Rating = " + pair.getKey() + " OR ";
+            }   
+        }
+        if(rating.length() != 0){
+            rating = rating.substring(0, rating.length()-4);
+        }
         
         String genre = "";
         Iterator it = filters.entrySet().iterator();
@@ -179,23 +264,26 @@ public class FXMLHomeController implements Initializable {
         }
         
         if(!rating.equalsIgnoreCase("")){
-            whereClause = (whereClause.equalsIgnoreCase("")) ? rating : (whereClause + " AND (" + rating + ")");
+            whereClause = (whereClause.equalsIgnoreCase("")) ? "(" + rating + ")" : (whereClause + " AND (" + rating + ")");
         }
         
         if(!genre.equalsIgnoreCase("")){
-            whereClause = (whereClause.equalsIgnoreCase("")) ? rating : (whereClause + " AND (" + genre + ")");
+            whereClause = whereClause + ((!whereClause.equalsIgnoreCase("")) ? " AND " : "") + "(" + genre + ")" ;
         }
         
         if(!topSeller.equalsIgnoreCase("")){
-            whereClause = (whereClause.equalsIgnoreCase("")) ? rating : (whereClause + " AND (" + topSeller + ")");
+            whereClause = whereClause + ((!whereClause.equalsIgnoreCase("")) ? " AND " : "") + "(" + topSeller + ")" ;
         }
         
         if(!topBookfyTimes.equalsIgnoreCase("")){
-            whereClause = (whereClause.equalsIgnoreCase("")) ? rating : (whereClause + " AND (" + topBookfyTimes + ")");
+            whereClause = whereClause + ((!whereClause.equalsIgnoreCase("")) ? " AND " : "") + "(" + topBookfyTimes + ")" ;
         }
         
-        String sql = "SELECT BookId from Book WHERE " + whereClause;
-        System.out.println(sql);
+        String sql = "SELECT BookId from Book " + (!whereClause.equalsIgnoreCase("") ? "WHERE " + whereClause : "");
+
+        if(!author.equalsIgnoreCase("")){
+            sql = "SELECT BookId from Book WHERE Author = \"" + author + "\"";
+        }
         
         try {
             ResultSet rs = Bookfy.getDatabaseHandler().execQuery(sql);
@@ -243,5 +331,5 @@ public class FXMLHomeController implements Initializable {
             Logger.getLogger(FXMLMainController.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
-    }
+    }  
 }

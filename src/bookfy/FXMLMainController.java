@@ -15,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javax.swing.JOptionPane;
@@ -151,7 +152,37 @@ public class FXMLMainController implements Initializable {
             Logger.getLogger(FXMLMainController.class.getName()).log(Level.SEVERE, null, ex);
         }   
     }  
+
+    public void displayBookDetail(Book book){
+        try {  
+            FXMLBookDetailsController controller = new FXMLBookDetailsController(book);
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/bookfy/FXMLBookDetails.fxml"));
+            loader.setController(controller);
+
+            AnchorPane bookPane = loader.load();
+            
+            showContent(bookPane);
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLMainController.class.getName()).log(Level.SEVERE, null, ex);
+        }   
+    }  
     
+    public void displayImageView(Book book){
+        try {  
+            FXMLImageViewController controller = new FXMLImageViewController(book);
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/bookfy/FXMLImageView.fxml"));
+            loader.setController(controller);
+
+            AnchorPane imagePane = loader.load();
+            showContent(imagePane);
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLMainController.class.getName()).log(Level.SEVERE, null, ex);
+        }    
+    }  
+    
+                        
     private void displaySearch(){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/bookfy/FXMLSearch.fxml"));

@@ -12,10 +12,14 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+import org.controlsfx.glyphfont.FontAwesome;
+import org.controlsfx.glyphfont.Glyph;
 
 /**
  * FXML Controller class
@@ -26,12 +30,17 @@ public class FXMLSearchController implements Initializable {
 
     @FXML
     private TextField txtSearch;
+    @FXML
+    private Button btnHome;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        Glyph g = new Glyph("FontAwesome", FontAwesome.Glyph.HOME).size(24).color(new Color(244.0/255.0, 67.0/255.0, 54.0/255.0, 1));
+        btnHome.setGraphic(g);
+        
         txtSearch.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -60,7 +69,14 @@ public class FXMLSearchController implements Initializable {
     }
     
     private void search(){
-        Bookfy.getHome().search();
+        Bookfy.getHome().search("");
+    }
+
+    @FXML
+    private void home(MouseEvent event) {
+        Bookfy.getHome().clear();
+        Bookfy.getHome().search("");
+        Bookfy.getMainWindowController().displayHome();
     }
     
 }

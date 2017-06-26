@@ -11,7 +11,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import org.controlsfx.control.Rating;
 import org.controlsfx.glyphfont.FontAwesome;
@@ -30,9 +32,9 @@ public class FXMLBookCompactController implements Initializable {
     @FXML
     private ImageView imgView;
     @FXML
-    private Button btnView;
-    @FXML
     private Button btnAdd;
+    @FXML
+    private Label lblPrice;
 
     public FXMLBookCompactController(Book book) {
         this.book = book;
@@ -50,11 +52,12 @@ public class FXMLBookCompactController implements Initializable {
         if(book.getImage() != null){
             imgView.setImage(book.getImage());
         }
-        
+        lblPrice.setText("$" + book.getPrice());
     }    
 
     @FXML
-    private void addToCart(ActionEvent event) {
+    private void bookDetails(MouseEvent event) {
+        System.out.println("losding book details");
+        Bookfy.getMainWindowController().displayBookDetail(book);
     }
-    
 }
