@@ -234,7 +234,7 @@ public class FXMLHomeController implements Initializable {
         while (r.hasNext()) {
             Entry pair = (Entry)r.next();
             if((boolean)pair.getValue() == true){
-                rating += "Rating = " + pair.getKey() + " OR ";
+                rating += "Rating >= " + pair.getKey() + " OR ";
             }   
         }
         if(rating.length() != 0){
