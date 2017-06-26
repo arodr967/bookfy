@@ -6,6 +6,7 @@
 package bookfy;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -19,6 +20,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import java.sql.Blob;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -39,6 +46,10 @@ public class FXMLViewUserController implements Initializable {
     private Label lblUserID;
     @FXML
     private Label lblEmail;
+    //load user image
+    @FXML
+    private ImageView usersImage;
+    
 
 
     /**
@@ -46,11 +57,17 @@ public class FXMLViewUserController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        User user = Bookfy.getUser();
         displayLabelInfo();
         loadShippingAddress();
         LoadHomeAddress();
         loadCreditCards();
-    }    
+        //load user image into window
+        if(user.getUserImage() != null)
+        {
+            usersImage.setImage(user.getUserImage());
+        }
+    }
     
     private void displayLabelInfo(){
         User user = Bookfy.getUser();
@@ -117,5 +134,15 @@ public class FXMLViewUserController implements Initializable {
     private void signoff(ActionEvent event) {
         Bookfy.getMainWindowController().displayLogIn();
     }
-
+    
+    @FXML
+    private void uploadImage(ActionEvent event) {
+    
+        //call userImage.java class
+        new userImage();
+        
+   
+    }
+    
+    
 }

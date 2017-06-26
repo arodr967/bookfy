@@ -5,11 +5,15 @@
  */
 package bookfy;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.image.Image;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,7 +25,7 @@ public class User {
     private String lastName;
     private String userName;
     private String email;
-    
+    private Image userImage;
     private Address home;
     private Address shipping;
     
@@ -39,7 +43,7 @@ public class User {
     }
 
     //user already exist so load it from the database
-    public User(String userName) {
+    public User(String userName) throws IOException {
         this.userName = userName;
         creditCards = new ArrayList<>();
         loadUserData();
@@ -97,8 +101,9 @@ public class User {
         return creditCards;
     }
     
-    private void loadUserData(){
-        String query = "SELECT FirstName, LastName, email, AddressLine, City, State, Country FROM user where UserID = \'" + userName + "\'";
+    
+    private void loadUserData() throws IOException{
+        String query = "SELECT FirstName, LastName, email, AddressLine, City, State, Country, userImage FROM user where UserID = \'" + userName + "\'";
 
         ResultSet rs = Bookfy.getDatabaseHandler().execQuery(query);
 
@@ -112,6 +117,15 @@ public class User {
                 String state = rs.getString(6);
                 String country = rs.getString(7);
                 home = new Address(firstName + " " + lastName, addressLine, "", city, state, 0, country);
+                //retrieve image from user table
+                Blob blob = rs.getBlob(8);
+              
+                if(blob != null){
+                  InputStream is = blob.getBinaryStream();
+                  userImage = new Image(is);
+                  is.close();
+                }
+                
             }
             
             loadShippingInfo();
@@ -222,5 +236,10 @@ public class User {
     public void deactivate(){
          String query = "UPDATE user SET LazyDelete = '" + 1 + "' WHERE UserID='" + getUserName() + "';";
          Bookfy.getDatabaseHandler().execAction(query);
+    }
+    
+    //return user image
+    public Image getUserImage() {
+        return userImage;
     }
 }

@@ -12,11 +12,11 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="750.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bookfy.FXMLViewUserController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="750.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bookfy.FXMLViewUserController">
    <children>
       <VBox alignment="TOP_RIGHT" prefHeight="600.0" prefWidth="750.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label prefHeight="27.0" prefWidth="805.0" styleClass="headerlabel" text="Label">
+            <Label prefHeight="27.0" prefWidth="805.0" styleClass="headerlabel" text="MY ACCOUNT">
                <VBox.margin>
                   <Insets left="10.0" right="10.0" top="10.0" />
                </VBox.margin></Label>
@@ -46,15 +46,12 @@
                      <children>
                         <VBox alignment="CENTER" maxWidth="-Infinity" prefWidth="100.0">
                            <children>
-                              <ImageView fitHeight="200.0" fitWidth="200.0">
-                                 <image>
-                                    <Image url="@noimage.jpg" />
-                                 </image>
+                              <ImageView fx:id="usersImage" fitHeight="200.0" fitWidth="200.0">
                                  <VBox.margin>
                                     <Insets top="30.0" />
                                  </VBox.margin>
                               </ImageView>
-                              <Button mnemonicParsing="false" styleClass="button-flat" text="UPLOAD IMAGE" />
+                              <Button mnemonicParsing="false" onAction="#uploadImage" styleClass="button-flat" text="UPLOAD IMAGE" />
                            </children>
                            <VBox.margin>
                               <Insets left="10.0" />
