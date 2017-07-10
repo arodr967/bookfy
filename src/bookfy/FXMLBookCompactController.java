@@ -15,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javax.swing.JOptionPane;
 import org.controlsfx.control.Rating;
 import org.controlsfx.glyphfont.FontAwesome;
 import org.controlsfx.glyphfont.Glyph;
@@ -59,5 +60,12 @@ public class FXMLBookCompactController implements Initializable {
     private void bookDetails(MouseEvent event) {
         System.out.println("losding book details");
         Bookfy.getMainWindowController().displayBookDetail(book);
+    }
+
+    @FXML
+    private void addToCart(MouseEvent event) {
+        FXMLShoppingCartController s = Bookfy.getShoppingCart();
+        Bookfy.getShoppingCart().addToCart(book);
+        JOptionPane.showMessageDialog(null, book.getTitle() + " has bee added to the cart.");
     }
 }

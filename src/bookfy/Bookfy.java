@@ -5,10 +5,14 @@
  */
 package bookfy;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
@@ -21,6 +25,8 @@ public class Bookfy extends Application {
     private static User user;
     private static String search;
     private static FXMLHomeController home;
+    private static FXMLShoppingCartController shoppingCart;
+    private static AnchorPane shoppingCartPane;
     
     public enum Account {
         SIGNUP,
@@ -83,5 +89,22 @@ public class Bookfy extends Application {
 
     public static void setHome(FXMLHomeController home) {
         Bookfy.home = home;
+    }
+
+    public static void setShoppingCart(FXMLShoppingCartController shoppingCart) {
+        Bookfy.shoppingCart = shoppingCart;
+        System.out.println("Shopping cart created");
+    }
+
+    public static FXMLShoppingCartController getShoppingCart() {
+        return shoppingCart;
+    }
+
+    public static AnchorPane getShoppingCartPane() {
+        return shoppingCartPane;
+    }
+
+    public static void setShoppingCartPane(AnchorPane shoppingCartPane) {
+        Bookfy.shoppingCartPane = shoppingCartPane;
     }
 }

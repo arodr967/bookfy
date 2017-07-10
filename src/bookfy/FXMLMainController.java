@@ -27,7 +27,7 @@ import javax.swing.JOptionPane;
  */
 public class FXMLMainController implements Initializable {
     private AnchorPane home;
-
+    
     @FXML
     private HBox searchPane;
     @FXML
@@ -46,6 +46,7 @@ public class FXMLMainController implements Initializable {
             //no user logged in
             Bookfy.setUser(null);
             Bookfy.setHome(null);
+            Bookfy.setShoppingCart(null);
             
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/bookfy/FXMLLogin.fxml"));
             AnchorPane logIn = loader.load();
@@ -128,6 +129,10 @@ public class FXMLMainController implements Initializable {
         }
     }
     
+    public void displayShoppingCart(){
+        AnchorPane s = Bookfy.getShoppingCartPane();
+        showContent(Bookfy.getShoppingCartPane());   
+    }
     
     public void displayHome(){
         if(home != null){

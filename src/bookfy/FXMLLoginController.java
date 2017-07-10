@@ -7,15 +7,18 @@ package bookfy;
 
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javax.swing.JOptionPane;
 
 /**
@@ -53,8 +56,15 @@ public class FXMLLoginController implements Initializable {
                     return;
                 }
                 //JOptionPane.showMessageDialog(null, "Welcome " + rs.getString(1) + " " + rs.getString(2));
-                User user = new User(userName);
-                Bookfy.getMainWindowController().displayHome(user);
+                
+                //create shopping cart
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/bookfy/FXMLShoppingCart.fxml"));
+                AnchorPane shoppingCart = loader.load();
+                Bookfy.setShoppingCart(loader.getController());
+                Bookfy.setShoppingCartPane(shoppingCart);
+                
+                User user = new User(userName);   
+                Bookfy.getMainWindowController().displayHome(user);    
             }
             else{
                 JOptionPane.showMessageDialog(null, "Oppps... Wrong username or password.");

@@ -32,6 +32,8 @@ public class Book{
     private String publisher;
     private String releaseDate;
 
+    private int cartQty; //used in user shopping cart
+    
     public Book(int ID, String title, String author, String genre, double price, String description, double rating, boolean topSeller, Image image, boolean bookfyTimes, String authorBio, String publisher, String releaseDate) {
         this.ID = ID;
         this.title = title;
@@ -46,6 +48,8 @@ public class Book{
         this.authorBio = authorBio;
         this.publisher = publisher;
         this.releaseDate = releaseDate;
+        
+        cartQty = 0;
     }
 
     public Book(int ID) throws InvalidBookException{
@@ -89,6 +93,32 @@ public class Book{
         }
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Book other = (Book) obj;
+        if (this.ID != other.ID) {
+            return false;
+        }
+        return true;
+    }
+
+    
+    
     public int getID() {
         return ID;
     }
@@ -192,7 +222,12 @@ public class Book{
     public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
     }
-    
 
-    
+    public int getCartQty() {
+        return cartQty;
+    }
+
+    public void setCartQty(int cartQty) {
+        this.cartQty = cartQty;
+    } 
 }

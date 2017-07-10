@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="185.0" prefWidth="750.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fx:id="imgImage" fitHeight="150.0" fitWidth="122.0" layoutX="14.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="lblTitle" layoutX="150.0" layoutY="14.0" text="White Fur">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblAuthor" layoutX="150.0" layoutY="49.0" text="White Fur">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblPrice" layoutX="150.0" layoutY="76.0" text="\$ 15.99">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="150.0" layoutY="137.0" text="Quantity:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <JFXComboBox fx:id="cboQuantity" layoutX="227.0" layoutY="138.0" prefHeight="25.0" prefWidth="141.0" />
+      <Hyperlink layoutX="496.0" layoutY="139.0" onAction="#saveForLater" styleClass="hyperLink" text="Save for later">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Hyperlink>
+      <JFXButton fx:id="btnDelete" layoutX="516.0" layoutY="53.0" onAction="#removeFromCart" />
+      <Separator layoutY="178.0" prefHeight="0.0" prefWidth="750.0" />
+   </children>
+</AnchorPane>

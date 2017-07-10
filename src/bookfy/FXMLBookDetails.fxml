@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.Rating?>
 
-<AnchorPane id="AnchorPane" prefHeight="730.0" prefWidth="750.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="730.0" prefWidth="750.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bookfy.FXMLBookDetailsController">
    <children>
       <Label layoutX="10.0" layoutY="10.0" prefHeight="27.0" prefWidth="725.0" styleClass="headerlabel" text="BOOK DETAILS" />
       <ImageView fx:id="imgImage" fitHeight="300.0" fitWidth="225.0" layoutX="21.0" layoutY="50.0" onMouseClicked="#expand" pickOnBounds="true">
@@ -39,7 +39,7 @@
                   <Hyperlink fx:id="lblAuthor" onMouseClicked="#browse" prefHeight="30.0" prefWidth="376.0" styleClass="hyperLink" text="Hyperlink" />
                   <HBox alignment="TOP_RIGHT" prefHeight="34.0" prefWidth="85.0">
                      <children>
-                        <Button fx:id="btnShoppingCart" mnemonicParsing="false" prefHeight="34.0" prefWidth="65.0" styleClass="button-raised" />
+                        <Button fx:id="btnShoppingCart" mnemonicParsing="false" onMouseClicked="#addToCart" prefHeight="34.0" prefWidth="65.0" styleClass="button-raised" />
                      </children>
                   </HBox>
                </children>

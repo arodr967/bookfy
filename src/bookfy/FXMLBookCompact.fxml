@@ -30,7 +30,7 @@
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font></Label>
-                        <Button fx:id="btnAdd" maxWidth="50.0" minWidth="50.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" styleClass="button-raised" />
+                        <Button fx:id="btnAdd" maxWidth="50.0" minWidth="50.0" mnemonicParsing="false" onMouseClicked="#addToCart" prefHeight="25.0" prefWidth="50.0" styleClass="button-raised" />
                      </children>
                      <VBox.margin>
                         <Insets right="10.0" />
