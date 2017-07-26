@@ -15,6 +15,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
@@ -46,12 +47,13 @@ public class FXMLShoppingCartLineController implements Initializable {
         this.book = book;
     }
 
-    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        btnDelete.setCursor(Cursor.HAND);
+        
         Vector comboBoxItems=new Vector();
         final DefaultComboBoxModel model = new DefaultComboBoxModel(comboBoxItems);
             for(int i = 1; i <= 10; i++){

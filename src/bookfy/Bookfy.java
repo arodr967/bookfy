@@ -5,11 +5,9 @@
  */
 package bookfy;
 
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -34,6 +32,8 @@ public class Bookfy extends Application {
         DELETE
     }
     
+    public static Scene scene;
+    
     @Override
     public void start(Stage stage) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLMain.fxml"));
@@ -43,8 +43,8 @@ public class Bookfy extends Application {
         
         search = "";
         
-        Scene scene = new Scene(root);
-        
+        scene = new Scene(root);
+
         //if we need to start maxmized
         //stage.setMaximized(true);
         stage.setScene(scene);

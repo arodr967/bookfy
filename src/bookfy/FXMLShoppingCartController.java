@@ -75,8 +75,9 @@ public class FXMLShoppingCartController implements Initializable {
     
     public void removeFromCart(Book book){
         cartBooks.remove(book);
-        
+        laterBooks.remove(book);
         displayBooks();
+        displaySavedForLater();
     }
     
     public void moveToLater(Book book){
@@ -91,7 +92,7 @@ public class FXMLShoppingCartController implements Initializable {
         vboxSavedForLater.getChildren().clear();
         
         for(Book b : laterBooks){
-            try {                
+            try {              
                 FXMLShoppingCartLaterLineItemController controller = new FXMLShoppingCartLaterLineItemController(b);
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(getClass().getResource("/bookfy/FXMLShoppingCartLaterLineItem.fxml"));
@@ -109,8 +110,11 @@ public class FXMLShoppingCartController implements Initializable {
         clearCart();
         
         double subTotal = 0;
+        int totalBooks = 0;
+        
         for(Book b : cartBooks){
             try {
+                totalBooks += b.getCartQty();
                 subTotal += b.getPrice() * b.getCartQty();
                 
                 FXMLShoppingCartLineController controller = new FXMLShoppingCartLineController(b);
@@ -125,6 +129,7 @@ public class FXMLShoppingCartController implements Initializable {
             }
         }
         
+        Bookfy.getMainWindowController().getSearchController().setQty(totalBooks);
         updateSubTotal(subTotal);
     }
     

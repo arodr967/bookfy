@@ -40,6 +40,7 @@ and open the template in the editor.
 }
 
 .button-raised, .button-flat {
+    -fx-cursor: hand;
     -fx-font-weight: bold;
 }
 
@@ -107,6 +108,14 @@ and open the template in the editor.
    -fx-font-size: 20;
 }
 
+.cartlabel {
+   -fx-text-fill: white;
+   -fx-font-weight: bold;
+   -fx-font-size: 14;
+   -fx-background-color: black;
+   -fx-background-radius: 14 14 14 14;
+}
+
 /*******************************************************************************
  *                                                                             *
  * Search			                       			       *
@@ -158,5 +167,52 @@ and open the template in the editor.
 }
 
 .check-box-large:selected .box {
+    -fx-background-color: #f44336;
+}
+
+
+
+
+.radiobutton .radio {
+    -fx-background-insets: 0;
+    -fx-border-color: #f44336;
+    -fx-border-radius: 10px; 
+}
+
+.radiobutton .dot {
+    -fx-mark-highlight-color: #f44336 ;
+    -fx-mark-color: #f44336 ;
+}
+
+
+.combo-box1{
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 12;
+    
+}
+.combo-box1 > .list-cell {
+    -fx-background-color: #f44336;
+    -fx-background-insets: -3 0 -3 0;
+    -fx-background-radius: 2 0 0 2;
+}
+.combo-box1:contains-focus {
+    -fx-background-color: #f44336;
+    -fx-background-insets: -3 0 -3 0;
+    -fx-background-radius: 2 0 0 2;
+}
+.combo-box1:focused > .list-cell{
+    -fx-background-color: #f44336;
+    -fx-background-insets: -3 0 -3 0;
+    -fx-background-radius: 2 0 0 2;
+}
+
+.combo-box1-popup .list-view .list-cell:hover {
+    -fx-text-fill: white;
+    -fx-background-color: #f44336;
+}
+
+.combo-box1 .cell:selected {
+    -fx-text-fill: white;
     -fx-background-color: #f44336;
 }

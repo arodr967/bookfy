@@ -8,42 +8,50 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import org.controlsfx.control.MaskerPane?>
 
-<HBox alignment="CENTER" prefHeight="900.0" prefWidth="800.0" styleClass="pane" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bookfy.FXMLMainController">
+
+<StackPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bookfy.FXMLMainController">
    <children>
-      <GridPane prefWidth="890.0" styleClass="pane">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints maxHeight="100.0" minHeight="100.0" prefHeight="100.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
+      <HBox alignment="CENTER" prefHeight="900.0" prefWidth="800.0" styleClass="pane" stylesheets="@styles.css">
          <children>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <GridPane prefWidth="890.0" styleClass="pane">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="100.0" minHeight="100.0" prefHeight="100.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
                <children>
-                  <ImageView fitHeight="125.0" fitWidth="800.0" preserveRatio="true">
-                     <image>
-                        <Image url="@banner.jpg" />
-                     </image>
-                  </ImageView>
-               </children>
-            </HBox>
-            <HBox fx:id="searchPane" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1" />
-            <ScrollPane prefWidth="800.0" GridPane.rowIndex="2">
-               <content>
-                  <HBox fx:id="mainContent" alignment="TOP_CENTER" prefWidth="780.0">
-                     <padding>
-                        <Insets left="20.0" />
-                     </padding>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="125.0" fitWidth="800.0" preserveRatio="true">
+                           <image>
+                              <Image url="@banner.jpg" />
+                           </image>
+                        </ImageView>
+                     </children>
                   </HBox>
-               </content>
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin>
-            </ScrollPane>
+                  <HBox fx:id="searchPane" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1" />
+                  <ScrollPane prefWidth="800.0" GridPane.rowIndex="2">
+                     <content>
+                        <HBox fx:id="mainContent" alignment="TOP_CENTER" prefWidth="780.0">
+                           <padding>
+                              <Insets left="20.0" />
+                           </padding>
+                        </HBox>
+                     </content>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </ScrollPane>
+               </children>
+            </GridPane>
          </children>
-      </GridPane>
+      </HBox>
+      <MaskerPane fx:id="mask" />
    </children>
-</HBox>
+</StackPane>

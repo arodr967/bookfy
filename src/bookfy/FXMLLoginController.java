@@ -11,13 +11,23 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Platform;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javax.swing.JOptionPane;
 
@@ -37,45 +47,34 @@ public class FXMLLoginController implements Initializable {
         //start logic here
     }    
 
-    @FXML
-    void makeLogin(ActionEvent event) {
-        logIn();
-    } 
-
     private void logIn(){
-        try {
-            String userName = txtUsername.getText();
-            
-            String query = "SELECT FirstName, LastName, LazyDelete FROM user where UserID = \'" + userName + "\' AND password = \"" + txtPassword.getText() + "\"";
+        Bookfy.getMainWindowController().maskPane("Logging into the system.");
+        LogInHelper helper = new LogInHelper();            
+        helper.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+               @Override
+               public void handle(WorkerStateEvent t) {
+                   //addData((ArrayList<PortedEnclosureRecommendation>)t.getSource().getValue());
+                   boolean success = (boolean)t.getSource().getValue();
+                   if(success){
+                       try{
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/bookfy/FXMLShoppingCart.fxml"));
+                            AnchorPane shoppingCart = loader.load();
+                            Bookfy.setShoppingCart(loader.getController());
+                            Bookfy.setShoppingCartPane(shoppingCart);
 
-            ResultSet rs = Bookfy.getDatabaseHandler().execQuery(query);
-
-            if(rs.next()){
-                if(!rs.getString(3).equalsIgnoreCase("0")){//account has been deactivated
-                    JOptionPane.showMessageDialog(null, "Your account has been deactivated.", "Bookfy", JOptionPane.INFORMATION_MESSAGE);
-                    return;
-                }
-                //JOptionPane.showMessageDialog(null, "Welcome " + rs.getString(1) + " " + rs.getString(2));
-                
-                //create shopping cart
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/bookfy/FXMLShoppingCart.fxml"));
-                AnchorPane shoppingCart = loader.load();
-                Bookfy.setShoppingCart(loader.getController());
-                Bookfy.setShoppingCartPane(shoppingCart);
-                
-                User user = new User(userName);   
-                Bookfy.getMainWindowController().displayHome(user);    
-            }
-            else{
-                JOptionPane.showMessageDialog(null, "Oppps... Wrong username or password.");
-            }
-        } catch (SQLException ex) {
-            //Logger.getLogger(Bookfy.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, ex);
-        }
-        catch (Exception e){
-            JOptionPane.showMessageDialog(null, e);
-        }
+                            User user = new User(txtUsername.getText());   
+                            Bookfy.getMainWindowController().displayHome(user);   
+                        }
+                        catch(IOException ex){
+                            System.out.println(ex);
+                        }
+                   }
+                    else{
+                       Bookfy.getMainWindowController().unmaskPane();
+                   }
+               }
+           });
+        helper.start();    
     }
     
     @FXML
@@ -92,6 +91,51 @@ public class FXMLLoginController implements Initializable {
         if(event.getCode() == KeyCode.ENTER)
         {
             logIn();
+        }
+    }
+        
+    @FXML
+    private void makeLogin(MouseEvent event) {
+        logIn();
+    }
+    
+    class LogInHelper extends Service<Boolean>{
+        protected Task<Boolean> createTask() {
+            return new Task<Boolean>() {
+                protected Boolean call(){
+                    try {
+                    String userName = txtUsername.getText();
+
+                    String query = "SELECT FirstName, LastName, LazyDelete FROM user where UserID = \'" + userName + "\' AND password = \"" + txtPassword.getText() + "\"";
+
+                    ResultSet rs = Bookfy.getDatabaseHandler().execQuery(query);
+
+                        /*For testing
+                        try {
+                            Thread.sleep(3000);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(FXMLLoginController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        */
+                        
+                    if(rs.next()){
+                        if(!rs.getString(3).equalsIgnoreCase("0")){//account has been deactivated
+                            JOptionPane.showMessageDialog(null, "Your account has been deactivated.", "Bookfy", JOptionPane.INFORMATION_MESSAGE);
+                            return false;
+                        }
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "Oppps... Wrong username or password.");
+                        return false;
+                    }
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(null, ex);
+                    return false; 
+                }
+                
+                    return true;
+                }
+            };
         }
     }
 }

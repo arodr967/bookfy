@@ -10,12 +10,16 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
 import javax.swing.JOptionPane;
+import org.controlsfx.control.Notifications;
 import org.controlsfx.control.Rating;
 import org.controlsfx.glyphfont.FontAwesome;
 import org.controlsfx.glyphfont.Glyph;
@@ -46,6 +50,9 @@ public class FXMLBookCompactController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        ratRating.setMouseTransparent(true);
+        imgView.setCursor(Cursor.HAND);
+        
         Glyph g = new Glyph("FontAwesome", FontAwesome.Glyph.SHOPPING_CART).size(18).color(Color.WHITE);
         btnAdd.setGraphic(g);
         
@@ -64,8 +71,26 @@ public class FXMLBookCompactController implements Initializable {
 
     @FXML
     private void addToCart(MouseEvent event) {
-        FXMLShoppingCartController s = Bookfy.getShoppingCart();
-        Bookfy.getShoppingCart().addToCart(book);
-        JOptionPane.showMessageDialog(null, book.getTitle() + " has bee added to the cart.");
+        if(book.getCartQty() <= 9){
+            Bookfy.getShoppingCart().addToCart(book);
+
+            Notifications notification = Notifications.create()  
+               .title("Shopping cart updated!")
+               .text(book.getTitle() + " has been added to the cart.")
+               .position(Pos.CENTER)
+               .hideAfter(Duration.seconds(3));
+
+            notification.showInformation();
+        }
+        else{
+            Notifications notification = Notifications.create()  
+               .title("Shopping cart!")
+               .text("Shopping cart is full for this item.")
+               .position(Pos.CENTER)
+               .hideAfter(Duration.seconds(3));
+
+            notification.showError();
+        }
+            
     }
 }

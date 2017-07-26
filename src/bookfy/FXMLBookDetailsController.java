@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
@@ -20,7 +21,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
 import javax.swing.JOptionPane;
+import org.controlsfx.control.Notifications;
 import org.controlsfx.control.Rating;
 import org.controlsfx.glyphfont.FontAwesome;
 import org.controlsfx.glyphfont.Glyph;
@@ -109,8 +112,26 @@ public class FXMLBookDetailsController implements Initializable {
 
     @FXML
     private void addToCart(MouseEvent event) {
-        Bookfy.getShoppingCart().addToCart(book);
-        JOptionPane.showMessageDialog(null, book.getTitle() + " has bee added to the cart.");
+        if(book.getCartQty() <= 9){
+            Bookfy.getShoppingCart().addToCart(book);
+
+            Notifications notification = Notifications.create()  
+               .title("Shopping cart updated!")
+               .text(book.getTitle() + " has been added to the cart.")
+               .position(Pos.CENTER)
+               .hideAfter(Duration.seconds(3));
+
+            notification.showInformation();
+        }
+        else{
+            Notifications notification = Notifications.create()  
+               .title("Shopping cart!")
+               .text("Shopping cart is full for this item.")
+               .position(Pos.CENTER)
+               .hideAfter(Duration.seconds(3));
+
+            notification.showError();
+        }
     }
     
 }

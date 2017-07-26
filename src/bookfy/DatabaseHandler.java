@@ -18,6 +18,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
+import javafx.scene.Cursor;
 import javax.swing.JOptionPane;
 
 /**
@@ -95,6 +99,7 @@ public class DatabaseHandler {
             return null;
         } finally {
         }
+
         return result;
     }
     

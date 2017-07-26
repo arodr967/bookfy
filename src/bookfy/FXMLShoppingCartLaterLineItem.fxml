@@ -34,6 +34,6 @@
       <JFXComboBox fx:id="cboQuantity" layoutX="237.0" layoutY="148.0" prefHeight="25.0" prefWidth="141.0" />
       <JFXButton fx:id="btnDelete" layoutX="526.0" layoutY="63.0" onAction="#removeFromCart" />
       <Separator layoutX="10.0" layoutY="188.0" prefHeight="0.0" prefWidth="750.0" />
-      <JFXButton fx:id="btnAddToCart" layoutX="526.0" layoutY="148.0" onAction="#removeFromCart" onMouseClicked="#addToCart" styleClass="button-raised" />
+      <JFXButton fx:id="btnAddToCart" layoutX="526.0" layoutY="148.0" onMouseClicked="#addToCart" styleClass="button-raised" />
    </children>
 </AnchorPane>

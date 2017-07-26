@@ -11,14 +11,18 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javax.swing.JOptionPane;
+import org.controlsfx.control.MaskerPane;
 
 /**
  * FXML Controller class
@@ -27,17 +31,22 @@ import javax.swing.JOptionPane;
  */
 public class FXMLMainController implements Initializable {
     private AnchorPane home;
+    private FXMLSearchController searchController;
+    private AnchorPane search;
     
     @FXML
     private HBox searchPane;
     @FXML
     private HBox mainContent;
+    @FXML
+    private MaskerPane mask;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        unmaskPane();
         displayLogIn();
     }    
     
@@ -153,6 +162,7 @@ public class FXMLMainController implements Initializable {
             
             showContent(home);
             displaySearch();
+            searchController.setSearchFocus();
         } catch (IOException ex) {
             Logger.getLogger(FXMLMainController.class.getName()).log(Level.SEVERE, null, ex);
         }   
@@ -186,12 +196,15 @@ public class FXMLMainController implements Initializable {
             Logger.getLogger(FXMLMainController.class.getName()).log(Level.SEVERE, null, ex);
         }    
     }  
-    
                         
+    
     private void displaySearch(){
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/bookfy/FXMLSearch.fxml"));
-            AnchorPane search = loader.load();
+            if(searchController == null){
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/bookfy/FXMLSearch.fxml"));
+                search = loader.load();
+                searchController = loader.getController();
+            }
 
             searchPane.getChildren().add(search);
         } catch (IOException ex) {
@@ -207,5 +220,19 @@ public class FXMLMainController implements Initializable {
         //mainContent.setContent(pane);
         mainContent.getChildren().clear();
         mainContent.getChildren().add(pane);
+    }
+    
+    Service service;
+    public void maskPane(String message){
+        mask.setText(message);
+        mask.setVisible(true);
+    }
+    
+    public void unmaskPane(){
+        mask.setVisible(false);
+    }
+    
+    public FXMLSearchController getSearchController(){
+        return searchController;
     }
 }
