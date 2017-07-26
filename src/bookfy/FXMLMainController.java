@@ -56,7 +56,7 @@ public class FXMLMainController implements Initializable {
             Bookfy.setUser(null);
             Bookfy.setHome(null);
             Bookfy.setShoppingCart(null);
-            
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/bookfy/FXMLLogin.fxml"));
             AnchorPane logIn = loader.load();
 

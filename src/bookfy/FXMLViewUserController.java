@@ -132,16 +132,14 @@ public class FXMLViewUserController implements Initializable {
 
     @FXML
     private void signoff(ActionEvent event) {
+        Bookfy.getMainWindowController().getSearchController().setQty(0);
         Bookfy.getMainWindowController().displayLogIn();
     }
     
     @FXML
     private void uploadImage(ActionEvent event) {
-    
         //call userImage.java class
         new userImage();
-        
-   
     }
     
     

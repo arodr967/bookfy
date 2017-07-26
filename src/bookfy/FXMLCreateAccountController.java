@@ -98,6 +98,7 @@ public class FXMLCreateAccountController implements Initializable {
                     + StateTextField.getText() + "','"
                     + CountryTextField.getText() + "');";
             Bookfy.getDatabaseHandler().execAction(query);
+            Bookfy.getMainWindowController().displayLogIn();
         } else if (!addressFieldsCheck() & inputValidation() & passwordFlag) {
             String query = "INSERT INTO user(UserID , FirstName, LastName, email, password)\n"
                     + "VALUES('" + userNameTextField.getText() + "','"
@@ -106,6 +107,7 @@ public class FXMLCreateAccountController implements Initializable {
                     + EmailAddressTextField.getText() + "','"
                     + passwordTextField.getText() + "');";
             Bookfy.getDatabaseHandler().execAction(query);
+            Bookfy.getMainWindowController().displayLogIn();
         }
 
     }
