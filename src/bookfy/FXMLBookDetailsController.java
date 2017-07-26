@@ -17,6 +17,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -60,7 +61,7 @@ public class FXMLBookDetailsController implements Initializable {
     private ImageView imgImage;
     @FXML
     private Rating ratRating;
-
+    
     public FXMLBookDetailsController(Book book) {
         this.book = book;
     }
@@ -70,7 +71,7 @@ public class FXMLBookDetailsController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        ratRating.setDisable(true);
+        ratRating.setMouseTransparent(true);
         
         Glyph g = new Glyph("FontAwesome", FontAwesome.Glyph.SHOPPING_CART).size(18).color(Color.WHITE);
         btnShoppingCart.setGraphic(g);

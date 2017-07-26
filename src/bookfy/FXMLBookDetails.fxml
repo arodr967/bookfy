@@ -23,14 +23,14 @@
       <Button layoutX="683.0" layoutY="38.0" mnemonicParsing="false" onMouseClicked="#back" styleClass="button-flat" text="BACK" />
       <VBox layoutX="256.0" layoutY="62.0" prefHeight="288.0" prefWidth="479.0">
          <children>
-            <Label fx:id="lblTitle" text="White Fur: A Novel">
+            <Label fx:id="lblTitle" alignment="BOTTOM_LEFT" prefHeight="75.0" prefWidth="475.0" text="White Fur: A Novel" wrapText="true" VBox.vgrow="ALWAYS">
                <font>
-                  <Font name="System Bold" size="36.0" />
+                  <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <Rating fx:id="ratRating">
+            <Rating fx:id="ratRating" scaleX="0.75" scaleY="0.75">
                <padding>
-                  <Insets bottom="10.0" />
+                  <Insets bottom="25.0" left="-30.0" />
                </padding>
             </Rating>
             <HBox prefHeight="15.0" prefWidth="479.0">
